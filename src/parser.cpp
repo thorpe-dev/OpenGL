@@ -1,20 +1,12 @@
-#include <boost/spirit/include/qi.hpp>
+#include <boost/tokenizer.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
 
 namespace parser
 {
-    namespace qi = boost::spirit::qi;
-    namespace ascii = boost::spirit::ascii;
-
-    template<typename Iterator>
-        bool parse_vtk_file(Iterator First, Iterator Last)
+        bool parse_vtk_file(std::iterator First, std::iterator Last)
         {
-            using qi::double_;
-            using qi::phrase_parse;
-            using ascii::space;
-
             return false;
         }
 }

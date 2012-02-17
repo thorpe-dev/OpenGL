@@ -53,15 +53,15 @@ src/CMakeFiles/cgRender.dir/parser.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/parser.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/parser.cpp.o"
-	cd /home/michael/Programming/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/parser.cpp.o -c /home/michael/Programming/src/parser.cpp
+	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/parser.cpp.o -c /home/michael/Programming/src/parser.cpp
 
 src/CMakeFiles/cgRender.dir/parser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/parser.cpp.i"
-	cd /home/michael/Programming/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/parser.cpp > CMakeFiles/cgRender.dir/parser.cpp.i
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/parser.cpp > CMakeFiles/cgRender.dir/parser.cpp.i
 
 src/CMakeFiles/cgRender.dir/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/parser.cpp.s"
-	cd /home/michael/Programming/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/parser.cpp -o CMakeFiles/cgRender.dir/parser.cpp.s
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/parser.cpp -o CMakeFiles/cgRender.dir/parser.cpp.s
 
 src/CMakeFiles/cgRender.dir/parser.cpp.o.requires:
 .PHONY : src/CMakeFiles/cgRender.dir/parser.cpp.o.requires
