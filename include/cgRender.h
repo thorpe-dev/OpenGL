@@ -10,9 +10,13 @@ using namespace std;
 
 struct vtk_file
 {
-	vector<float> points;
-	vector<int> polygons;
-	vector<float> point_data;
+	int point_count;
+	int polygon_size;
+	int polygon_no;
+
+	vector<float>* points;
+	vector<int>* polygons;
+	vector<float>* point_data;
 
 };
 
