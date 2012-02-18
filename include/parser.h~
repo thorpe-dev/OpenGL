@@ -1,0 +1,22 @@
+#ifndef _PARSER_H
+#define _PARSER_H
+
+#include "cgRender.h"
+#include <string>
+
+class parser
+{
+public:
+    
+    parser(std::string s);
+    
+    vtk_file* get_vtk_file();
+    
+private:
+    
+    vtk_file* vtk;
+    vtk_file* parse_vtk_file(std::string s);
+    parser() {} // private constructor
+};
+
+#endif
