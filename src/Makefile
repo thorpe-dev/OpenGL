@@ -112,29 +112,29 @@ cgRender/fast:
 	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
 .PHONY : cgRender/fast
 
-OpenGL_cgRender.o: OpenGL_cgRender.cpp.o
-.PHONY : OpenGL_cgRender.o
+GLUT.o: GLUT.cpp.o
+.PHONY : GLUT.o
 
 # target to build an object file
-OpenGL_cgRender.cpp.o:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o
-.PHONY : OpenGL_cgRender.cpp.o
+GLUT.cpp.o:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.o
+.PHONY : GLUT.cpp.o
 
-OpenGL_cgRender.i: OpenGL_cgRender.cpp.i
-.PHONY : OpenGL_cgRender.i
+GLUT.i: GLUT.cpp.i
+.PHONY : GLUT.i
 
 # target to preprocess a source file
-OpenGL_cgRender.cpp.i:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i
-.PHONY : OpenGL_cgRender.cpp.i
+GLUT.cpp.i:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.i
+.PHONY : GLUT.cpp.i
 
-OpenGL_cgRender.s: OpenGL_cgRender.cpp.s
-.PHONY : OpenGL_cgRender.s
+GLUT.s: GLUT.cpp.s
+.PHONY : GLUT.s
 
 # target to generate assembly for a file
-OpenGL_cgRender.cpp.s:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s
-.PHONY : OpenGL_cgRender.cpp.s
+GLUT.cpp.s:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.s
+.PHONY : GLUT.cpp.s
 
 parser.o: parser.cpp.o
 .PHONY : parser.o
@@ -169,9 +169,9 @@ help:
 	@echo "... cgRender"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... OpenGL_cgRender.o"
-	@echo "... OpenGL_cgRender.i"
-	@echo "... OpenGL_cgRender.s"
+	@echo "... GLUT.o"
+	@echo "... GLUT.i"
+	@echo "... GLUT.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"

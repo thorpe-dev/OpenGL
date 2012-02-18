@@ -49,28 +49,28 @@ include src/CMakeFiles/cgRender.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/cgRender.dir/flags.make
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o: src/OpenGL_cgRender.cpp
+src/CMakeFiles/cgRender.dir/GLUT.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
+src/CMakeFiles/cgRender.dir/GLUT.cpp.o: src/GLUT.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o"
-	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o -c /home/michael/Programming/src/OpenGL_cgRender.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/GLUT.cpp.o"
+	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/GLUT.cpp.o -c /home/michael/Programming/src/GLUT.cpp
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/OpenGL_cgRender.cpp > CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i
+src/CMakeFiles/cgRender.dir/GLUT.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/GLUT.cpp.i"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/GLUT.cpp > CMakeFiles/cgRender.dir/GLUT.cpp.i
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/OpenGL_cgRender.cpp -o CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s
+src/CMakeFiles/cgRender.dir/GLUT.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/GLUT.cpp.s"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/GLUT.cpp -o CMakeFiles/cgRender.dir/GLUT.cpp.s
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires:
-.PHONY : src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
+src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires:
+.PHONY : src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
-	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides.build
-.PHONY : src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides
+src/CMakeFiles/cgRender.dir/GLUT.cpp.o.provides: src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.o.provides.build
+.PHONY : src/CMakeFiles/cgRender.dir/GLUT.cpp.o.provides
 
-src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides.build: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o
+src/CMakeFiles/cgRender.dir/GLUT.cpp.o.provides.build: src/CMakeFiles/cgRender.dir/GLUT.cpp.o
 
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/parser.cpp
@@ -97,13 +97,13 @@ src/CMakeFiles/cgRender.dir/parser.cpp.o.provides.build: src/CMakeFiles/cgRender
 
 # Object files for target cgRender
 cgRender_OBJECTS = \
-"CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o" \
+"CMakeFiles/cgRender.dir/GLUT.cpp.o" \
 "CMakeFiles/cgRender.dir/parser.cpp.o"
 
 # External object files for target cgRender
 cgRender_EXTERNAL_OBJECTS =
 
-bin/cgRender: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o
+bin/cgRender: src/CMakeFiles/cgRender.dir/GLUT.cpp.o
 bin/cgRender: src/CMakeFiles/cgRender.dir/parser.cpp.o
 bin/cgRender: /usr/lib/i386-linux-gnu/libGLU.so
 bin/cgRender: /usr/lib/i386-linux-gnu/libGL.so
@@ -123,7 +123,7 @@ bin/cgRender: src/CMakeFiles/cgRender.dir/link.txt
 src/CMakeFiles/cgRender.dir/build: bin/cgRender
 .PHONY : src/CMakeFiles/cgRender.dir/build
 
-src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
+src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires
 src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/parser.cpp.o.requires
 .PHONY : src/CMakeFiles/cgRender.dir/requires
 

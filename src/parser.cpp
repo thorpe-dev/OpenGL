@@ -55,7 +55,6 @@
         {
             points->push_back(lexical_cast<float>(*beg++));
         }
-        cout << points->size() << endl;
 
         beg++;
         

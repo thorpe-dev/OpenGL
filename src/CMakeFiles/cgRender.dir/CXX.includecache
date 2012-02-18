@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/michael/Programming/src/parser.cpp
-boost/tokenizer.hpp
+/home/michael/Programming/src/GLUT.cpp
+parser.h
 -
-boost/lexical_cast.hpp
--
-boost/algorithm/string.hpp
+cgRender.h
 -
 string
 -
-cgRender.h
-/home/michael/Programming/src/cgRender.h
+iostream
+-
+fstream
+-
 

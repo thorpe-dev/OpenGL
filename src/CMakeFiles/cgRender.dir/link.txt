@@ -1,1 +1,1 @@
-clang++    -g -Wall -Wextra    CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o CMakeFiles/cgRender.dir/parser.cpp.o  -o ../bin/cgRender -rdynamic -lvtkHybrid -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi 
+clang++    -g -Wall -Wextra    CMakeFiles/cgRender.dir/GLUT.cpp.o CMakeFiles/cgRender.dir/parser.cpp.o  -o ../bin/cgRender -rdynamic -lvtkHybrid -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi -lGLEW 

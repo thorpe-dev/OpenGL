@@ -113,6 +113,9 @@ int main(int argc, char** argv)
     //Parse the file
     cout << "Parsing vtk file: " << argv[1] << endl;
     vtk_file* file = parser::parser((string)buffer).get_vtk_file();
+    
+    
+    cout << file->points->size() << endl;
 
     // Initialize graphics window
     glutInit(&argc, argv);

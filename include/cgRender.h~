@@ -15,8 +15,8 @@ struct vtk_file
 	int polygon_no;
 
 	vector<float>* points;
-	vector<int> polygons;
-	vector<float> point_data;
+	vector<int>* polygons;
+	vector<float>* point_data;
 
 };
 
