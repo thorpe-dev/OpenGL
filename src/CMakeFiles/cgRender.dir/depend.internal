@@ -5,3 +5,5 @@ src/CMakeFiles/cgRender.dir/GLUT.cpp.o
  /home/michael/Programming/src/GLUT.cpp
 src/CMakeFiles/cgRender.dir/parser.cpp.o
  /home/michael/Programming/src/parser.cpp
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
+ /home/michael/Programming/src/shader_utils.cpp

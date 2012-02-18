@@ -95,16 +95,41 @@ src/CMakeFiles/cgRender.dir/parser.cpp.o.provides: src/CMakeFiles/cgRender.dir/p
 
 src/CMakeFiles/cgRender.dir/parser.cpp.o.provides.build: src/CMakeFiles/cgRender.dir/parser.cpp.o
 
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o: src/shader_utils.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/shader_utils.cpp.o"
+	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/shader_utils.cpp.o -c /home/michael/Programming/src/shader_utils.cpp
+
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/shader_utils.cpp.i"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/shader_utils.cpp > CMakeFiles/cgRender.dir/shader_utils.cpp.i
+
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/shader_utils.cpp.s"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/shader_utils.cpp -o CMakeFiles/cgRender.dir/shader_utils.cpp.s
+
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires:
+.PHONY : src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires
+
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.provides: src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.provides.build
+.PHONY : src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.provides
+
+src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.provides.build: src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
+
 # Object files for target cgRender
 cgRender_OBJECTS = \
 "CMakeFiles/cgRender.dir/GLUT.cpp.o" \
-"CMakeFiles/cgRender.dir/parser.cpp.o"
+"CMakeFiles/cgRender.dir/parser.cpp.o" \
+"CMakeFiles/cgRender.dir/shader_utils.cpp.o"
 
 # External object files for target cgRender
 cgRender_EXTERNAL_OBJECTS =
 
 bin/cgRender: src/CMakeFiles/cgRender.dir/GLUT.cpp.o
 bin/cgRender: src/CMakeFiles/cgRender.dir/parser.cpp.o
+bin/cgRender: src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
 bin/cgRender: /usr/lib/i386-linux-gnu/libGLU.so
 bin/cgRender: /usr/lib/i386-linux-gnu/libGL.so
 bin/cgRender: /usr/lib/i386-linux-gnu/libSM.so
@@ -125,6 +150,7 @@ src/CMakeFiles/cgRender.dir/build: bin/cgRender
 
 src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires
 src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/parser.cpp.o.requires
+src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires
 .PHONY : src/CMakeFiles/cgRender.dir/requires
 
 src/CMakeFiles/cgRender.dir/clean:

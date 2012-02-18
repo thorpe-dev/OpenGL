@@ -9,15 +9,23 @@
 
 using namespace std;
 
+
+struct GL_GLOBAL
+{
+    float t;
+    float dt;
+    bool rotate;    
+};
+
 struct vtk_file
 {
-	int point_count;
-	int polygon_size;
-	int polygon_no;
+    int point_count;
+    int polygon_size;
+    int polygon_no;
 
-	vector<float>* points;
-	vector<int>* polygons;
-	vector<float>* point_data;
+    vector<float>* points;
+    vector<int>* polygons;
+    vector<float>* point_data;
 
 };
 
