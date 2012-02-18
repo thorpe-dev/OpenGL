@@ -1,4 +1,8 @@
-#include <cgRender.h>
+#include "cgRender.h"
+#include "parser.h"
+#include <string>
+#include <iostream>
+#include <fstream>
 
 void init() 
 {
@@ -78,12 +82,37 @@ int main(int argc, char** argv)
 
     // Check input arguments
     // and print a usage on failure
+   using namespace std;
+    // Check input arguments
+    // and print a usage on failure
     if (argc != 3)
     {
-        std::cout << "Usage: " << argv[0] << "and then a .vtk file, followed by 1 (meaning Gourand rendered "
-            << "or 2 (meaning texture mapped render)" << std::endl;
+        cout << "Usage: " << argv[0] << "and then a .vtk file, "
+            << "followed by 1 (meaning Gourand rendered "
+            << "or 2 (meaning texture mapped render)" << endl;
         exit(EXIT_FAILURE);
     }
+
+    //int length;
+    ifstream inputFile(argv[1]);
+
+
+    // get length of file:
+    inputFile.seekg (0, std::ios::end);
+    int length = inputFile.tellg();
+    inputFile.seekg (0, std::ios::beg);
+
+    // allocate memory for the string
+    char* buffer = new char[length];
+    
+    //Read file into string
+    inputFile.read (buffer,length);
+    inputFile.close();
+    std::string vtk_input = buffer;
+    
+    //Parse the file
+    cout << "Parsing vtk file: " << argv[1] << endl;
+    vtk_file* file = parser::parser((string)buffer).get_vtk_file();
 
     // Initialize graphics window
     glutInit(&argc, argv);

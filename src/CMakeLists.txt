@@ -1,9 +1,7 @@
-add_executable(cgRender parser.cpp)
+add_executable(cgRender OpenGL_cgRender.cpp parser.cpp)
 
-find_package(VTK REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-
-include(${VTK_USE_FILE})
 
 target_link_libraries(cgRender vtkHybrid)
 

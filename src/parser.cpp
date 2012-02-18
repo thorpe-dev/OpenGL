@@ -2,17 +2,22 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <string>
-#include <iostream>
-#include <fstream>
-#include <istream>
+// #include <iostream>
+// #include <fstream>
+// #include <istream>
 #include "cgRender.h"
+#include "parser.h"
 
-namespace parser
-{
+
     using namespace std;
     using namespace boost;
     
-    vtk_file* parse_vtk_file(string s)
+    parser::parser(string s)
+    {
+        vtk = parse_vtk_file(s);
+    }
+    
+    vtk_file* parser::parse_vtk_file(string s)
     {
 
         
@@ -75,12 +80,14 @@ namespace parser
         beg++;
         beg++;
         
+        //While the token is not at the end, add texture data to vector
         cout << "Parsing texture data" << endl;
         while (beg != tok.end())
         {
             texture->push_back(lexical_cast<float>(*beg++));
         }
-
+        
+        // Set up vtk struct
         input->point_count = point_count;
         input->polygon_size = polygon_size;
         input->polygon_no = polygon_no;
@@ -93,39 +100,3 @@ namespace parser
 
         return input;
     }
-
-}
-
-int main (int argc, char** argv)
-{
-    using namespace std;
-    // Check input arguments
-    // and print a usage on failure
-    if (argc != 3)
-    {
-        cout << "Usage: " << argv[0] << "and then a .vtk file, followed by 1 (meaning Gourand rendered "
-            << "or 2 (meaning texture mapped render)" << endl;
-        exit(EXIT_FAILURE);
-    }
-
-    //int length;
-    ifstream inputFile(argv[1]);
-
-
-    // get length of file:
-    inputFile.seekg (0, std::ios::end);
-    int length = inputFile.tellg();
-    inputFile.seekg (0, std::ios::beg);
-
-    // allocate memory for the string
-    char* buffer = new char[length];
-    
-    //Read file into string
-    inputFile.read (buffer,length);
-    inputFile.close();
-    std::string vtk_input = buffer;
-    
-    //Parse the file
-    cout << "Parsing vtk file: " << argv[1] << endl;
-    vtk_file* file = parser::parse_vtk_file((string)buffer);
-}

@@ -74,7 +74,7 @@ src/preinstall:
 src/CMakeFiles/cgRender.dir/all:
 	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/depend
 	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles  1 2
 	@echo "Built target cgRender"
 .PHONY : src/CMakeFiles/cgRender.dir/all
 
@@ -84,7 +84,7 @@ all: src/CMakeFiles/cgRender.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/cgRender.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cgRender.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles 0
 .PHONY : src/CMakeFiles/cgRender.dir/rule

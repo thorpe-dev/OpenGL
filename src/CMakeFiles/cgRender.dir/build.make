@@ -49,9 +49,32 @@ include src/CMakeFiles/cgRender.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/cgRender.dir/flags.make
 
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o: src/OpenGL_cgRender.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o"
+	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o -c /home/michael/Programming/src/OpenGL_cgRender.cpp
+
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/OpenGL_cgRender.cpp > CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.i
+
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s"
+	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/OpenGL_cgRender.cpp -o CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.s
+
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires:
+.PHONY : src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
+
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides.build
+.PHONY : src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides
+
+src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.provides.build: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o
+
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/parser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/parser.cpp.o"
 	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/parser.cpp.o -c /home/michael/Programming/src/parser.cpp
 
@@ -74,42 +97,23 @@ src/CMakeFiles/cgRender.dir/parser.cpp.o.provides.build: src/CMakeFiles/cgRender
 
 # Object files for target cgRender
 cgRender_OBJECTS = \
+"CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o" \
 "CMakeFiles/cgRender.dir/parser.cpp.o"
 
 # External object files for target cgRender
 cgRender_EXTERNAL_OBJECTS =
 
+bin/cgRender: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o
 bin/cgRender: src/CMakeFiles/cgRender.dir/parser.cpp.o
+bin/cgRender: /usr/lib/i386-linux-gnu/libGLU.so
+bin/cgRender: /usr/lib/i386-linux-gnu/libGL.so
+bin/cgRender: /usr/lib/i386-linux-gnu/libSM.so
+bin/cgRender: /usr/lib/i386-linux-gnu/libICE.so
+bin/cgRender: /usr/lib/i386-linux-gnu/libX11.so
+bin/cgRender: /usr/lib/i386-linux-gnu/libXext.so
 bin/cgRender: /usr/lib/libglut.so
 bin/cgRender: /usr/lib/libXmu.so
 bin/cgRender: /usr/lib/i386-linux-gnu/libXi.so
-bin/cgRender: /usr/lib/libgl2ps.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libXt.so
-bin/cgRender: /usr/lib/libpq.so
-bin/cgRender: /usr/lib/libmysqlclient.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libpng.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libz.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libjpeg.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libtiff.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libexpat.so
-bin/cgRender: /usr/lib/libavformat.so
-bin/cgRender: /usr/lib/libavcodec.so
-bin/cgRender: /usr/lib/libavutil.so
-bin/cgRender: /usr/lib/libswscale.so
-bin/cgRender: /usr/lib/openmpi/lib/libmpi.so
-bin/cgRender: /usr/lib/openmpi/lib/libopen-rte.so
-bin/cgRender: /usr/lib/openmpi/lib/libopen-pal.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libdl.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libnsl.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libutil.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libm.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libdl.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libnsl.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libutil.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libm.so
-bin/cgRender: /usr/lib/openmpi/lib/libmpi_cxx.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libGL.so
-bin/cgRender: /usr/lib/i386-linux-gnu/libfreetype.so
 bin/cgRender: src/CMakeFiles/cgRender.dir/build.make
 bin/cgRender: src/CMakeFiles/cgRender.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/cgRender"
@@ -119,6 +123,7 @@ bin/cgRender: src/CMakeFiles/cgRender.dir/link.txt
 src/CMakeFiles/cgRender.dir/build: bin/cgRender
 .PHONY : src/CMakeFiles/cgRender.dir/build
 
+src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o.requires
 src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/parser.cpp.o.requires
 .PHONY : src/CMakeFiles/cgRender.dir/requires
 

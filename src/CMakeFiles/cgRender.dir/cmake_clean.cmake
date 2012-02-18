@@ -1,4 +1,5 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/cgRender.dir/OpenGL_cgRender.cpp.o"
   "CMakeFiles/cgRender.dir/parser.cpp.o"
   "../bin/cgRender.pdb"
   "../bin/cgRender"
