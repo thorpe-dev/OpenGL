@@ -14,8 +14,8 @@ static struct {
     GLuint program;
     GLint attribute_coord2d;
     vtk_file* data;
-    string vertex_shader;
-    string fragment_shader;
+    char* vertex_shader;
+    char* fragment_shader;
 } singleton_var;
 
 static void setupGlobals()
@@ -27,13 +27,13 @@ static void setupGlobals()
 
 static bool init_resources(void)
 {
-    GLint compile_ok = GL_FALSE, link_ok = GL_FALSE;
+    GLint link_ok = GL_FALSE;
     GLuint vs, fs;
     
     if ((vs = shader_create(singleton_var.vertex_shader, GL_VERTEX_SHADER)) == 0)
         return false;
     
-    if ((fs = shader_create(singleton_var.vertex_shader, GL_FRAGMENT_SHADER)) == 0)
+    if ((fs = shader_create(singleton_var.fragment_shader, GL_FRAGMENT_SHADER)) == 0)
         return false;
     
     singleton_var.program = glCreateProgram();

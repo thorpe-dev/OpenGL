@@ -63,14 +63,19 @@ GLuint shader_create(char* fname, GLenum type)
         return 0;
     }
     
+    
     GLuint result = glCreateShader(type);
     
-    glShaderSource(result, 2, &source, NULL);
-    free((void*)source);
+    glShaderSource(result, 1, &source, NULL);
     
+    print_log(result);
+    //delete(source);
+        
     glCompileShader(result);
+    
     GLint compile_ok = GL_FALSE;
     glGetShaderiv(result, GL_COMPILE_STATUS, &compile_ok);
+    
     if (compile_ok == GL_FALSE)
     {
         cout << "Error in file: " << fname << endl;

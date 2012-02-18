@@ -6,8 +6,14 @@
 
 #IncludeRegexTransform: 
 
-/home/michael/Programming/src/shader_utils.cpp
+/home/michael/Programming/src/GLUT.cpp
+parser.h
+-
+cgRender.h
+-
 shader_utils.h
+-
+string
 -
 iostream
 -
