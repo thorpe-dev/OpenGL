@@ -28,35 +28,13 @@ static void setupGlobals()
 static bool init_resources(void)
 {
     GLint compile_ok = GL_FALSE, link_ok = GL_FALSE;
-    GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+    GLuint vs, fs;
     
-    const char* vertex = singleton_var.vertex_shader.c_str();
-    
-    glShaderSource(vs, 1, &vertex, NULL);
-
-    glCompileShader(vs);
-    glGetShaderiv(vs,GL_COMPILE_STATUS, &compile_ok);
-
-    if (!compile_ok)
-    {
-        cout << singleton_var.vertex_shader << endl;
-        print_log(vs);
-        cout << "Error in the vertex shader" << endl;
+    if ((vs = shader_create(singleton_var.vertex_shader, GL_VERTEX_SHADER)) == 0)
         return false;
-    }
-
-    GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     
-    const char* fragment = singleton_var.fragment_shader.c_str();
-            
-    glShaderSource(fs, 1, &fragment, NULL);
-    glCompileShader(fs);
-    glGetShaderiv(fs, GL_COMPILE_STATUS, &compile_ok);
-    if (!compile_ok) {
-        print_log(fs);
-        cout << "Error in fragment shader" << endl;
+    if ((fs = shader_create(singleton_var.vertex_shader, GL_FRAGMENT_SHADER)) == 0)
         return false;
-    }
     
     singleton_var.program = glCreateProgram();
     glAttachShader(singleton_var.program,vs);
@@ -65,7 +43,8 @@ static bool init_resources(void)
     glGetProgramiv(singleton_var.program,GL_LINK_STATUS, &link_ok);
     if (!link_ok)
     {
-        cout << "glLinkProgram:";
+        cout << "glLinkProgram: ";
+        print_log(singleton_var.program);
         return false;
     }
     
@@ -148,10 +127,13 @@ int main(int argc, char** argv)
             << "or 2 (meaning texture mapped render)" << endl;
         exit(EXIT_FAILURE);
     }
-    singleton_var.data = parser::parser((string)read_file(argv[1])).get_vtk_file();
-    singleton_var.vertex_shader = read_file(argv[2]).c_str();
-    singleton_var.fragment_shader = read_file(argv[3]).c_str();
+    
     setupGlobals();
+    
+    singleton_var.data = parser::parser((string)read_file(argv[1])).get_vtk_file();
+    singleton_var.vertex_shader = argv[2];
+    singleton_var.fragment_shader = argv[3];
+    
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
