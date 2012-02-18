@@ -9,10 +9,18 @@
 /home/michael/Programming/src/parser.cpp
 boost/tokenizer.hpp
 -
-iostream
+boost/lexical_cast.hpp
 -
-vector
+boost/algorithm/string.hpp
 -
 string
 -
+iostream
+-
+fstream
+-
+istream
+-
+cgRender.h
+/home/michael/Programming/src/cgRender.h
 

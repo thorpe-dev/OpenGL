@@ -4,14 +4,16 @@
 
 #include <GL/glut.h>
 #include <stdlib.h>
-#include <vtkGenericDataObjectReader.h>
-#include <vtkStructuredGrid.h>
-#include <vtkSmartPointer.h>
-#include <vtkPolyData.h>
+#include <vector>
 
 using namespace std;
 
-#include <fstream>
-#include <iostream>
+struct vtk_file
+{
+	vector<float> points;
+	vector<int> polygons;
+	vector<float> point_data;
+
+};
 
 #endif
