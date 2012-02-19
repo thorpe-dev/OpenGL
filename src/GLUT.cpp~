@@ -109,15 +109,16 @@ static bool init_resources(void)
 
 static void idle_func(void)
 {
+    //TODO: make this not be crazy
     float angle = glutGet(GLUT_ELAPSED_TIME) / 1000.0 * 45;  // 45° per second
-    glm::vec3 axis_z(0, 0, 1);
-    glm::mat4 anim = glm::rotate(glm::mat4(1.0f), angle, axis_z);
+    glm::vec3 axis_y(0, 1, 0);
+    glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
     
-    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0,0.0,-4.0));
+    glm::mat4 model = glm::translate(glm::mat4(0.4f), glm::vec3(0.0,0.0,-4.0));
     glm::mat4 view = glm::lookAt(glm::vec3(0.0,2.0,0.0),glm::vec3(0.0,0.0,-4.0), glm::vec3(0.0,1.0,0.0));
-    glm::mat4 projection = glm::perspective(45.0f,1.0f*singleton_var.screen_width/singleton_var.screen_height, 0.1f,10.0f);
+    glm::mat4 projection = glm::perspective(7.0f,1.0f*singleton_var.screen_width/singleton_var.screen_height, 0.1f,10.0f);
     
-    glm::mat4 mvp = projection * view * model * anim;
+    glm::mat4 mvp = projection * model * anim;
     
     glUseProgram(singleton_var.program);
     
@@ -128,7 +129,7 @@ static void idle_func(void)
 
 static void render(void)
 {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     
     
@@ -155,16 +156,6 @@ static void render(void)
     
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort),GL_UNSIGNED_SHORT,0);
     
-    glVertexAttribPointer(
-        singleton_var.attribute_coord3d,
-        3,
-        GL_FLOAT,
-        GL_FALSE,
-        3 * sizeof(GLfloat),
-        0
-    );
-    
-    //glDrawArrays(GL_TRIANGLES,0,3);
     glDisableVertexAttribArray(singleton_var.attribute_coord3d);
     
     glutSwapBuffers();
@@ -181,6 +172,13 @@ static void keyboard(unsigned char key, int, int)
             singleton_var.rotate = GL_TRUE;
             break;
     }
+}
+
+static void onReshape(int width, int height)
+{
+    singleton_var.screen_width = width;
+    singleton_var.screen_height = height;
+    glViewport(0,0,width, height);
 }
 
 static void free_resources(void)
@@ -216,8 +214,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(singleton_var.screen_width,singleton_var.screen_height);
     glutCreateWindow(argv[0]);
 
-    glutIdleFunc(&idle_func);
-    glutKeyboardFunc(keyboard);
+    
 
     GLenum glew_status = glewInit();
 
@@ -228,7 +225,11 @@ int main(int argc, char** argv)
     }
 
     if (init_resources())
-    {    
+    {   
+        glutIdleFunc(idle_func);
+        glutReshapeFunc(onReshape);
+        glutKeyboardFunc(keyboard);
+        glEnable(GL_DEPTH_TEST);
         glutDisplayFunc(render);
         glutMainLoop();
     }
