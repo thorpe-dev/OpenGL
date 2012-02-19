@@ -19,13 +19,11 @@
     
     vtk_file* parser::parse_vtk_file(string s)
     {
-
-        
         // Allocate memory for vtk_file struct and vectors
         
         vtk_file* input = (vtk_file*)malloc(sizeof(struct vtk_file));
         vector<float>* points = new vector<float>;
-        vector<int>* polygons = new vector<int>;
+        vector<short>* polygons = new vector<short>;
         vector<float>* texture = new vector<float>;
 
         
@@ -55,7 +53,6 @@
         {
             points->push_back(lexical_cast<float>(*beg++));
         }
-        cout << points->size() << endl;
 
         beg++;
         
@@ -66,10 +63,15 @@
         beg++;
 
         // While the token is not point_data, add polygons to vector
+        // We're going to drop every 4th element - the number of points making up the polygon
+        
         cout << "Parsing polygon data" << endl;
+        int count = 0;
         while (*beg != "POINT_DATA")
         {
-            polygons->push_back(lexical_cast<int>(*beg++));
+            if (count % 4 != 0)
+                polygons->push_back(lexical_cast<short>(*beg++));
+            count++;
         }
 
         // Move iterator into position

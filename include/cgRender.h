@@ -4,18 +4,14 @@
 
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <stdlib.h>
 #include <vector>
 
 using namespace std;
-
-
-struct GL_GLOBAL
-{
-    float t;
-    float dt;
-    bool rotate;    
-};
 
 struct vtk_file
 {
@@ -24,9 +20,8 @@ struct vtk_file
     int polygon_no;
 
     vector<float>* points;
-    vector<int>* polygons;
+    vector<short>* polygons;
     vector<float>* point_data;
-
 };
 
 #endif

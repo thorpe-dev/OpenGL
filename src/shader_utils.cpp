@@ -6,6 +6,21 @@
 
 using namespace std;
 
+
+template <typename T>
+T * vector_to_array(vector<T>* v)
+{
+    int size = v->size();
+    T* ret = new T[size];
+    
+    for (int i = 0; i < size / 3; i++)
+    {
+        ret[i] = (*v)[i];
+    }
+    
+    return ret;
+}
+
 // Debug function
 void print_log(GLuint object)
 {
@@ -35,17 +50,6 @@ void print_log(GLuint object)
 
 string read_file(char* fname)
 {
-    /*ifstream ifile(fname);
-    string filetext;
-
-    while( ifile.good() ) {
-        std::string line;
-        std::getline(ifile, line);
-        filetext.append(line + "\n");
-    }
-
-    return filetext;*/
-    
     ifstream t(fname);
     stringstream* buffer = new stringstream();
     *buffer << t.rdbuf();
@@ -55,6 +59,7 @@ string read_file(char* fname)
 
 GLuint shader_create(char* fname, GLenum type)
 {
+    cout << "Making shader from file: " << fname << endl;
     const char* source = read_file(fname).c_str();
         
     if (source == NULL)
