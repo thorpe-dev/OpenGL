@@ -18,6 +18,7 @@ static struct {
     char* fragment_shader;
     GLuint vbo_vertices;
     GLuint ibo_poly;
+    GLint location;
 } singleton_var;
 
 void setup_globals(void)
@@ -112,13 +113,13 @@ static void idle_func(void)
     //TODO: make this not be crazy
     float angle = glutGet(GLUT_ELAPSED_TIME) / 1000.0 * 45;  // 45° per second
     glm::vec3 axis_y(0, 1, 0);
-    glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
+    //glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
     
     glm::mat4 model = glm::translate(glm::mat4(0.4f), glm::vec3(0.0,0.0,-4.0));
     glm::mat4 view = glm::lookAt(glm::vec3(0.0,2.0,0.0),glm::vec3(0.0,0.0,-4.0), glm::vec3(0.0,1.0,0.0));
     glm::mat4 projection = glm::perspective(7.0f,1.0f*singleton_var.screen_width/singleton_var.screen_height, 0.1f,10.0f);
     
-    glm::mat4 mvp = projection * model * anim;
+    glm::mat4 mvp = projection * model;
     
     glUseProgram(singleton_var.program);
     
@@ -157,6 +158,8 @@ static void render(void)
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort),GL_UNSIGNED_SHORT,0);
     
     glDisableVertexAttribArray(singleton_var.attribute_coord3d);
+    
+    glFlush();
     
     glutSwapBuffers();
 }
@@ -229,7 +232,7 @@ int main(int argc, char** argv)
         glutIdleFunc(idle_func);
         glutReshapeFunc(onReshape);
         glutKeyboardFunc(keyboard);
-        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST | GL_LIGHTING);
         glutDisplayFunc(render);
         glutMainLoop();
     }

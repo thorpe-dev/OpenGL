@@ -1,5 +1,6 @@
 #version 120
 attribute vec3 coord3d;
+uniform vec4 light0Color;
 uniform mat4 mvp;
 
 void main(void) {
