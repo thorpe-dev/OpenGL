@@ -18,6 +18,8 @@ static struct {
     char* fragment_shader;
     GLuint vbo_vertices;
     GLuint ibo_poly;
+    
+    GLint location;
 } singleton_var;
 
 void setup_globals(void)
@@ -25,6 +27,13 @@ void setup_globals(void)
     singleton_var.screen_width = 256;
     singleton_var.screen_height = 256;
     singleton_var.rotate = GL_FALSE;
+}
+
+glFloat* calc_normals(void)
+{
+    glFloat* ret = new glFloat[singleton_var.data->polygons->size()];
+    
+    return ret;   
 }
 
 static bool init_resources(void)
@@ -104,6 +113,19 @@ static bool init_resources(void)
         cout << "Could not bind uniform " << uniform_name << endl;
         return false;
     }
+    
+    /*const char* light_name;
+    light_name = "light0Color";
+    singleton_var.location = glGetUniformLocation(singleton_var.program,light_name);
+    if (singleton_var.location == -1)
+    {
+        cout << "Could not bind light " << light_name << endl;
+        return false;
+    }
+    
+    GLfloat colour[4] = {0.4f,0,1,1};
+    
+    glUniform4fARB(singleton_var.location,0.4f,0,1,1);*/
     return true;    
 }
 
@@ -115,7 +137,7 @@ static void idle_func(void)
     //glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
     
     glm::mat4 model = glm::translate(glm::mat4(0.4f), glm::vec3(0.0,0.0,-4.0));
-    glm::mat4 view = glm::lookAt(glm::vec3(0.0,2.0,0.0),glm::vec3(0.0,0.0,-4.0), glm::vec3(0.0,1.0,0.0));
+    glm::mat4 view = glm::lookAt(glm::vec3(0.0,1.0,0.0),glm::vec3(0.0,0.0,-4.0), glm::vec3(0.0,1.0,0.0));
     glm::mat4 projection = glm::perspective(7.0f,1.0f*singleton_var.screen_width/singleton_var.screen_height, 0.1f,10.0f);
     
     glm::mat4 mvp = projection * model;
@@ -231,7 +253,13 @@ int main(int argc, char** argv)
         glutIdleFunc(idle_func);
         glutReshapeFunc(onReshape);
         glutKeyboardFunc(keyboard);
-        glEnable(GL_DEPTH_TEST | GL_LIGHTING);
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_LIGHTING);
+        glEnable(GL_RESCALE_NORMAL);
+        glEnable (GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE  );
+        
+
         glutDisplayFunc(render);
         glutMainLoop();
     }
