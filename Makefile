@@ -111,6 +111,19 @@ cgRender/fast:
 	$(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
 .PHONY : cgRender/fast
 
+#=============================================================================
+# Target rules for targets named vtk
+
+# Build rule for target.
+vtk: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 vtk
+.PHONY : vtk
+
+# fast build rule for target.
+vtk/fast:
+	$(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/build
+.PHONY : vtk/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -120,6 +133,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cgRender"
+	@echo "... vtk"
 .PHONY : help
 
 

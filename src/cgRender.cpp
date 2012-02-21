@@ -7,6 +7,10 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkDataObject.h>
+#include <vtkTexture.h>
+#include <vtkImageData.h>
+#include <vtkPNMReader.h>
+#include <vtkTransform.h>
 
 int main(int argc, char** argv) 
 {
@@ -14,18 +18,29 @@ int main(int argc, char** argv)
     // and print a usage on failure
     if (argc != 3)
     {
-        std::cout << "Usage: " << argv[0] << "and then a .vtk file, followed by 1 (meaning Gourand rendered "
-            << "or 2 (meaning texture mapped render)" << std::endl;
+        std::cout << "Usage: " << argv[0] << "and then a .vtk file, followed by a .ppm file" << endl;
         exit(EXIT_FAILURE);
     }
 
-    std::string inputFile = argv[1];
-
     vtkSmartPointer<vtkGenericDataObjectReader> inputReader 
         = vtkSmartPointer<vtkGenericDataObjectReader>::New();
-    inputReader->SetFileName(inputFile.c_str());
-
+    inputReader->SetFileName(argv[1]);
     inputReader->Update();
+    
+    vtkSmartPointer<vtkPNMReader> ppm 
+        = vtkSmartPointer<vtkPNMReader>::New();
+    ppm->SetFileName(argv[2]);
+    
+    vtkSmartPointer<vtkTexture> tex
+        = vtkSmartPointer<vtkTexture>::New();
+    tex->SetInput(ppm->GetOutput());
+    tex->InterpolateOn();
+    
+    vtkSmartPointer<vtkTransform> trans
+        = vtkSmartPointer<vtkTransform>::New();
+    trans->Translate(0.0,0.05,0);
+    
+    tex->SetTransform(trans);
     
     // Lets visualise this stuff!!!!
     
@@ -37,6 +52,7 @@ int main(int argc, char** argv)
     // Make an actor and set its mapper to the mapper
     vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(map);
+    actor->SetTexture(tex);
 
     // Make a new render and render window
     vtkSmartPointer<vtkRenderer> renderer =
@@ -45,15 +61,16 @@ int main(int argc, char** argv)
     vtkSmartPointer<vtkRenderWindow> renderWindow =
         vtkSmartPointer<vtkRenderWindow>::New();
     
-    // And the renderer to the render window
+    // And add the renderer to the render window
     renderWindow->AddRenderer(renderer);
     vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor =
         vtkSmartPointer<vtkRenderWindowInteractor>::New();
     renderWindowInteractor->SetRenderWindow(renderWindow);
 
     renderer->AddActor(actor);
-    renderer->SetBackground(0, 0, 0); // Background color green
+    renderer->SetBackground(0, 0, 0); // Background color black
 
+    renderWindow->SetSize(256,256);
     renderWindow->Render();
     renderWindowInteractor->Start();
 

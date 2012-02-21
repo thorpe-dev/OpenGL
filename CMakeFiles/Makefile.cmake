@@ -12,10 +12,17 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeSystem.cmake"
   "CMakeLists.txt"
   "src/CMakeLists.txt"
+  "/usr/lib/vtk-5.6/CMake/vtkMakeInstantiator.cmake"
+  "/usr/lib/vtk-5.6/UseVTK.cmake"
+  "/usr/lib/vtk-5.6/VTKConfig.cmake"
+  "/usr/lib/vtk-5.6/VTKConfigQt.cmake"
+  "/usr/lib/vtk-5.6/VTKConfigVersion.cmake"
+  "/usr/lib/vtk-5.6/VTKLibraryDepends.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeGenericSystem.cmake"
+  "/usr/share/cmake-2.8/Modules/CMakeImportBuildSettings.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CheckFunctionExists.cmake"
@@ -27,6 +34,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-2.8/Modules/FindOpenGL.cmake"
   "/usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake-2.8/Modules/FindPackageMessage.cmake"
+  "/usr/share/cmake-2.8/Modules/FindVTK.cmake"
   "/usr/share/cmake-2.8/Modules/FindX11.cmake"
   "/usr/share/cmake-2.8/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/share/cmake-2.8/Modules/Platform/Linux-GNU-CXX.cmake"
@@ -50,4 +58,5 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
   "src/CMakeFiles/cgRender.dir/DependInfo.cmake"
+  "src/CMakeFiles/vtk.dir/DependInfo.cmake"
   )

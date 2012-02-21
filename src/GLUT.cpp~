@@ -8,7 +8,6 @@ static struct {
     int screen_width;
     int screen_height;
     
-    GLint rotate;
     GLuint program;
     GLint attribute_coord3d;
     GLint uniform_mvp;
@@ -18,20 +17,30 @@ static struct {
     char* fragment_shader;
     GLuint vbo_vertices;
     GLuint ibo_poly;
-    
     GLint location;
+    
+    float camx,camy,camz,centx,centy,centz;
 } singleton_var;
 
 void setup_globals(void)
 {
     singleton_var.screen_width = 256;
     singleton_var.screen_height = 256;
-    singleton_var.rotate = GL_FALSE;
+    
+    singleton_var.camx = float(4.3);
+    singleton_var.camy = float(4.2);
+    singleton_var.camz = float(-5.1);
+    
+    singleton_var.centx = float(0.06);
+    singleton_var.centy = float(-0.13);
+    singleton_var.centz = float(-0.08);
 }
 
-glFloat* calc_normals(void)
+GLfloat* calc_normals(void)
 {
-    glFloat* ret = new glFloat[singleton_var.data->polygons->size()];
+    GLfloat* ret = new GLfloat[singleton_var.data->polygons->size()];
+    
+    
     
     return ret;   
 }
@@ -70,16 +79,12 @@ static bool init_resources(void)
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
     
+    float pos[4] = {-20.0, 20.0, 100.0, 0.0};
+    const GLfloat light_ambient[4]  = {0.1f, 0.1f, 0.1f, 1.0f};
     
-    
-    /*
-    glGenBuffers(1, &singleton_var.ibo_poly);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,singleton_var.ibo_poly);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                 (singleton_var.data->polygons->size())*sizeof(GLfloat), 
-                 poly,
-                 GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);*/
+    glEnable(GL_LIGHT0);
+    glLightfv(GL_LIGHT0, GL_POSITION, pos);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     
     // ATTACH ALL OF THE SHADERS!
     singleton_var.program = glCreateProgram();
@@ -132,6 +137,7 @@ static bool init_resources(void)
 static void idle_func(void)
 {
     //TODO: make this not be crazy
+    /*
     float angle = glutGet(GLUT_ELAPSED_TIME) / 1000.0 * 45;  // 45° per second
     glm::vec3 axis_y(0, 1, 0);
     //glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
@@ -146,7 +152,7 @@ static void idle_func(void)
     
     glUniformMatrix4fv(singleton_var.uniform_mvp,1, GL_FALSE, glm::value_ptr(mvp));
     
-    glutPostRedisplay();
+    glutPostRedisplay();*/
 }
 
 static void render(void)
@@ -192,17 +198,29 @@ static void keyboard(unsigned char key, int, int)
         case 'q' : case 'Q' :
             exit(EXIT_SUCCESS);
             break;
-        case 'r' : case 'R' :
-            singleton_var.rotate = GL_TRUE;
-            break;
     }
+}
+
+static void refresh()
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(singleton_var.camx,singleton_var.camy,singleton_var.camz,
+              singleton_var.centx,singleton_var.centy,singleton_var.centz,
+              0,1,0);
+    
+    cout << singleton_var.camx << "," << singleton_var.camy << "," << singleton_var.camz << endl;
 }
 
 static void onReshape(int width, int height)
 {
     singleton_var.screen_width = width;
     singleton_var.screen_height = height;
+    
     glViewport(0,0,width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(1.57f,1,0.1,100);    
 }
 
 static void free_resources(void)

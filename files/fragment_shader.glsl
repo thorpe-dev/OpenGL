@@ -1,4 +1,4 @@
-#version 120
+#version 300
 void main(void) {
     gl_FragColor[0] = 1.0;
     gl_FragColor[1] = 1.0;

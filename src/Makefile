@@ -112,6 +112,20 @@ cgRender/fast:
 	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
 .PHONY : cgRender/fast
 
+# Convenience name for target.
+src/CMakeFiles/vtk.dir/rule:
+	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/vtk.dir/rule
+.PHONY : src/CMakeFiles/vtk.dir/rule
+
+# Convenience name for target.
+vtk: src/CMakeFiles/vtk.dir/rule
+.PHONY : vtk
+
+# fast build rule for target.
+vtk/fast:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/build
+.PHONY : vtk/fast
+
 GLUT.o: GLUT.cpp.o
 .PHONY : GLUT.o
 
@@ -135,6 +149,30 @@ GLUT.s: GLUT.cpp.s
 GLUT.cpp.s:
 	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.s
 .PHONY : GLUT.cpp.s
+
+cgRender.o: cgRender.cpp.o
+.PHONY : cgRender.o
+
+# target to build an object file
+cgRender.cpp.o:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.o
+.PHONY : cgRender.cpp.o
+
+cgRender.i: cgRender.cpp.i
+.PHONY : cgRender.i
+
+# target to preprocess a source file
+cgRender.cpp.i:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.i
+.PHONY : cgRender.cpp.i
+
+cgRender.s: cgRender.cpp.s
+.PHONY : cgRender.s
+
+# target to generate assembly for a file
+cgRender.cpp.s:
+	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.s
+.PHONY : cgRender.cpp.s
 
 parser.o: parser.cpp.o
 .PHONY : parser.o
@@ -193,9 +231,13 @@ help:
 	@echo "... cgRender"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... vtk"
 	@echo "... GLUT.o"
 	@echo "... GLUT.i"
 	@echo "... GLUT.s"
+	@echo "... cgRender.o"
+	@echo "... cgRender.i"
+	@echo "... cgRender.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
