@@ -1,6 +1,9 @@
 #include <parser.h>
 #include <cgRender.h>
 #include <shader_utils.h>
+#include <math.h>
+#include <boost/foreach.hpp>
+
 
 //global variables
 static struct {
@@ -11,6 +14,8 @@ static struct {
     vector<glm::vec2>* tex;
     
     int width,height;
+    vector<float>* cam;
+    vector<float>* centre;
     
     
 } global;
@@ -19,6 +24,10 @@ void setupGlobal(void)
 {
     global.width = 256;
     global.height = 256;
+    float cam[3] = {4.3f,4.2f,-5.1f};
+    float centre[3] = {0.06f,-0.13f,-0.08f};
+    global.cam = new vector<float>(cam, cam + sizeof(cam)/sizeof(float));
+    global.centre = new vector<float>(centre, centre + sizeof(centre)/sizeof(float));
 }
 
 void display()
@@ -46,13 +55,32 @@ void display()
     glutPostRedisplay();
 }
 
+float to_radians(float degrees)
+{
+    cout << (4 * atan(1) * degrees / 180) << endl;
+    return (4 * atan(1) * degrees / 180);
+    
+}
+
+void reload()
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt((*global.cam)[0],(*global.cam)[1],(*global.cam)[2],
+              (*global.centre)[0],(*global.centre)[1],(*global.centre)[2],
+              0, 1, 0
+             );
+    
+    
+}
+
 void reshape (int x, int y)
 {
   glViewport (0, 0, x, y); 
   
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(1.57, 1, 0.1, 100); /* 1.57 is ~90 degrees */
+  gluPerspective(to_radians(90), 1, 0.1, 100);
 
   //refreshPositions();
 }
@@ -135,6 +163,21 @@ void buildVectors(vtk_file* data)
 
 void buildNormals(void)
 {
+    vector<glm::vec3> points;
+    glm::vec3 norm;
+    vector<glm::vec3> polygons = *global.polygons;
+    
+    BOOST_FOREACH(glm::vec3 poly, polygons)
+    {
+        points = vector<glm::vec3>(3);
+        for (int i = 0; i < 3; i++)
+        {
+            cout << poly[i];
+            points[i] = (*global.vertex)[poly[i]];
+        }
+        
+        glm::fastNormalize(glm::cross(c - a, b - a));
+    }
 }
 
 void init()
