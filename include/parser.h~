@@ -1,8 +1,20 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
-#include "cgRender.h"
 #include <string>
+
+using namespace std;
+
+struct vtk_file
+{
+    int point_count;
+    int polygon_size;
+    int polygon_no;
+
+    vector<float>* points;
+    vector<short>* polygons;
+    vector<float>* point_data;
+};
 
 class parser
 {
@@ -10,7 +22,7 @@ public:
     
     parser(std::string s);
     
-    vtk_file* get_vtk_file();
+    vtk_file* get_vtk_file() {return vtk;}
     
 private:
     

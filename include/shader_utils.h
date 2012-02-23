@@ -1,10 +1,13 @@
 #ifndef _SHADER_UTILS_H
 #define _SHADER_UTILS_H
 
-#include <GL/glew.h>
+#include <cgRender.h>
 #include <string>
 #include <stdlib.h>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 
 using namespace std;

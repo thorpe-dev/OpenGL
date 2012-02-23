@@ -1,8 +1,21 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
-#include "cgRender.h"
 #include <string>
+#include <vector>
+
+using namespace std;
+
+struct vtk_file
+{
+    int point_count;
+    int polygon_size;
+    int polygon_no;
+
+    vector<float>* points;
+    vector<short>* polygons;
+    vector<float>* point_data;
+};
 
 class parser
 {

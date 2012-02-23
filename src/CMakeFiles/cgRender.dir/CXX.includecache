@@ -6,13 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/michael/Programming/src/GLUT.cpp
-parser.h
+/home/michael/Programming/src/parser.cpp
+boost/tokenizer.hpp
 -
-cgRender.h
+boost/lexical_cast.hpp
 -
+boost/algorithm/string.hpp
+-
+string
+-
+
+/home/michael/Programming/src/shader_utils.cpp
 shader_utils.h
 -
-iostream
+GL/glut.h
 -
 

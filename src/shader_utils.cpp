@@ -1,8 +1,5 @@
 #include <shader_utils.h>
-
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <GL/glut.h>
 
 using namespace std;
 

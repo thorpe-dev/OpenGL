@@ -2,11 +2,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <string>
-// #include <iostream>
-// #include <fstream>
-// #include <istream>
-#include "cgRender.h"
-#include "parser.h"
+
+//include "cgRender.h"
+//include "parser.h"
 
 
     using namespace std;
@@ -70,7 +68,8 @@
         while (*beg != "POINT_DATA")
         {
             if (count % 4 != 0)
-                polygons->push_back(lexical_cast<short>(*beg++));
+                polygons->push_back(lexical_cast<short>(*beg));
+            beg++;
             count++;
         }
 

@@ -1,141 +1,294 @@
-#include "cgRender.h"
-#include "parser.h"
-#include <string>
-#include <iostream>
-#include <fstream>
+#include <parser.h>
+#include <cgRender.h>
+#include <shader_utils.h>
 
-void init() 
+
+static struct {
+    int screen_width;
+    int screen_height;
+    
+    GLuint program;
+    GLint attribute_coord3d;
+    GLint uniform_mvp;
+    vtk_file* data;
+    
+    char* vertex_shader;
+    char* fragment_shader;
+    GLuint vbo_vertices;
+    GLuint ibo_poly;
+    GLint location;
+    
+    float camx,camy,camz,centx,centy,centz;
+} singleton_var;
+
+void setup_globals(void)
 {
-    glClearColor (0.0, 0.0, 0.0, 0.0);
-    cout << "init" << endl;
-
-    /*
-       glShadeModel (GL_SMOOTH);
-
-    // Enable lighting
-    glEnable (GL_LIGHTING);
-    glEnable (GL_LIGHT0);
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    glLightfv(GL_LIGHT0, GL_AMBIENT,  LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE,  LightDiffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, LightSpecular);
-
-    // Set material parameters
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  MaterialSpecular);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, MaterialShininess);
-
-    // Enable Z-buffering
-    glEnable(GL_DEPTH_TEST);
-    */
+    singleton_var.screen_width = 256;
+    singleton_var.screen_height = 256;
+    
+    singleton_var.camx = float(4.3);
+    singleton_var.camy = float(4.2);
+    singleton_var.camz = float(-5.1);
+    
+    singleton_var.centx = float(0.06);
+    singleton_var.centy = float(-0.13);
+    singleton_var.centz = float(-0.08);
 }
 
-void display(void)
+GLfloat* calc_normals(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    cout << "display" << endl;
-
-    /*
-       for (all polygons)
-       glBegin(GL_POLYGON);
-       for (all vertices of polygon)
-    // Define texture coordinates of vertex
-    glTexCoord2f(...);
-    // Define normal of vertex
-    glNormal3f(...);
-    // Define coordinates of vertex
-    glVertex3f(...);
-    }
-    glEnd();
-    }
-    glFlush ();
-    //  or, if double buffering is used,
-    //  glutSwapBuffers();
-    */
-    }
-
-void reshape (int w, int h)
-{
-    cout << "reshape" << endl;
-
-    glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
-    /*
-       glMatrixMode (GL_PROJECTION);
-       glLoadIdentity();
-       gluPerspective(fovy, aspect, near, far);
-       glMatrixMode (GL_MODELVIEW);
-       glLoadIdentity();
-       gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz);
-       */
+    GLfloat* ret = new GLfloat[singleton_var.data->polygons->size()];
+    
+    
+    
+    return ret;   
 }
 
-void keyboard(unsigned char key, int x, int y)
+static bool init_resources(void)
 {
-    switch (key) {
-        case 27: // ESC
-            exit(0);
+    GLint link_ok = GL_FALSE;
+    GLuint vs, fs;
+    
+    if ((vs = shader_create(singleton_var.vertex_shader, GL_VERTEX_SHADER)) == 0)
+        return false;
+    
+    if ((fs = shader_create(singleton_var.fragment_shader, GL_FRAGMENT_SHADER)) == 0)
+        return false;
+    
+    GLfloat* vertices = &(*singleton_var.data->points)[0];
+    
+    // Set up vertices
+    glGenBuffers(1, &singleton_var.vbo_vertices);
+    glBindBuffer(GL_ARRAY_BUFFER,singleton_var.vbo_vertices);
+    glBufferData(GL_ARRAY_BUFFER,
+                 (singleton_var.data->point_count) * 3 * sizeof(GLfloat),
+                 vertices, 
+                 GL_STATIC_DRAW);
+    
+    GLshort* poly = &(*singleton_var.data->polygons)[0];
+    
+    // Set up polygons
+    glGenBuffers(1, &singleton_var.ibo_poly);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, singleton_var.ibo_poly);
+    
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+                 sizeof(GLshort) * singleton_var.data->polygons->size(), 
+                 poly, 
+                 GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+    
+    float pos[4] = {-20.0, 20.0, 100.0, 0.0};
+    const GLfloat light_ambient[4]  = {0.1f, 0.1f, 0.1f, 1.0f};
+    
+    glEnable(GL_LIGHT0);
+    glLightfv(GL_LIGHT0, GL_POSITION, pos);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    
+    // ATTACH ALL OF THE SHADERS!
+    singleton_var.program = glCreateProgram();
+    glAttachShader(singleton_var.program,vs);
+    glAttachShader(singleton_var.program,fs);
+    glLinkProgram(singleton_var.program);
+    glGetProgramiv(singleton_var.program,GL_LINK_STATUS, &link_ok);
+    
+    if (!link_ok)
+    {
+        cout << "glLinkProgram: ";
+        print_log(singleton_var.program);
+        return false;
+    }
+    
+    const char* attribute_name;
+    attribute_name = "coord3d";
+    singleton_var.attribute_coord3d = 
+        glGetAttribLocation(singleton_var.program, attribute_name);
+    if (singleton_var.attribute_coord3d == -1)
+    {
+        cout << "Could not bind attribute" << attribute_name << endl;
+        return false;
+    }
+    
+    const char* uniform_name;
+    uniform_name = "mvp";
+    singleton_var.uniform_mvp = glGetUniformLocation(singleton_var.program, uniform_name);
+    if (singleton_var.uniform_mvp == -1)
+    {
+        cout << "Could not bind uniform " << uniform_name << endl;
+        return false;
+    }
+    
+    /*const char* light_name;
+    light_name = "light0Color";
+    singleton_var.location = glGetUniformLocation(singleton_var.program,light_name);
+    if (singleton_var.location == -1)
+    {
+        cout << "Could not bind light " << light_name << endl;
+        return false;
+    }
+    
+    GLfloat colour[4] = {0.4f,0,1,1};
+    
+    glUniform4fARB(singleton_var.location,0.4f,0,1,1);*/
+    return true;    
+}
+
+static void idle_func(void)
+{
+    //TODO: make this not be crazy
+    /*
+    float angle = glutGet(GLUT_ELAPSED_TIME) / 1000.0 * 45;  // 45° per second
+    glm::vec3 axis_y(0, 1, 0);
+    //glm::mat4 anim = glm::rotate(glm::mat4(0.4f), angle, axis_y);
+    
+    glm::mat4 model = glm::translate(glm::mat4(0.4f), glm::vec3(0.0,0.0,-4.0));
+    glm::mat4 view = glm::lookAt(glm::vec3(0.0,1.0,0.0),glm::vec3(0.0,0.0,-4.0), glm::vec3(0.0,1.0,0.0));
+    glm::mat4 projection = glm::perspective(7.0f,1.0f*singleton_var.screen_width/singleton_var.screen_height, 0.1f,10.0f);
+    
+    glm::mat4 mvp = projection * model;
+    
+    glUseProgram(singleton_var.program);
+    
+    glUniformMatrix4fv(singleton_var.uniform_mvp,1, GL_FALSE, glm::value_ptr(mvp));
+    
+    glutPostRedisplay();*/
+}
+
+static void render(void)
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    
+    
+    glUseProgram(singleton_var.program);
+    
+    glEnableVertexAttribArray(singleton_var.attribute_coord3d);    
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, singleton_var.vbo_vertices);
+    
+    glVertexAttribPointer(
+        singleton_var.attribute_coord3d,
+        3,
+        GL_FLOAT,
+        GL_FALSE,
+        0,
+        0
+    );
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, singleton_var.ibo_poly);
+    
+    int size;
+    
+    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+    
+    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort),GL_UNSIGNED_SHORT,0);
+    
+    glDisableVertexAttribArray(singleton_var.attribute_coord3d);
+    
+    glFlush();
+    
+    glutSwapBuffers();
+}
+
+static void keyboard(unsigned char key, int, int)
+{
+    switch (key)
+    {
+        case 'q' : case 'Q' :
+            exit(EXIT_SUCCESS);
             break;
     }
 }
+
+static void refresh()
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(singleton_var.camx,singleton_var.camy,singleton_var.camz,
+              singleton_var.centx,singleton_var.centy,singleton_var.centz,
+              0,1,0);
+    
+    cout << singleton_var.camx << "," << singleton_var.camy << "," << singleton_var.camz << endl;
+}
+
+static void onReshape(int width, int height)
+{
+    singleton_var.screen_width = width;
+    singleton_var.screen_height = height;
+    
+    glViewport(0,0,width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(1.57f,1,0.1,100);
+    refresh();
+}
+
+static void free_resources(void)
+{
+    glDeleteProgram(singleton_var.program);
+    glDeleteBuffers(1, &singleton_var.ibo_poly);
+}
+
 
 int main(int argc, char** argv)
 {
 
     // Check input arguments
     // and print a usage on failure
-   using namespace std;
-    // Check input arguments
-    // and print a usage on failure
-    if (argc != 3)
+    if (argc != 5)
     {
         cout << "Usage: " << argv[0] << "and then a .vtk file, "
-            << "followed by 1 (meaning Gourand rendered "
+            << "followed by  the path to the vertex shader and fragment_shader "
+            << " lastly 1 (meaning Gourand rendered "
             << "or 2 (meaning texture mapped render)" << endl;
         exit(EXIT_FAILURE);
     }
-
-    //int length;
-    ifstream inputFile(argv[1]);
-
-
-    // get length of file:
-    inputFile.seekg (0, std::ios::end);
-    int length = inputFile.tellg();
-    inputFile.seekg (0, std::ios::beg);
-
-    // allocate memory for the string
-    char* buffer = new char[length];
     
-    //Read file into string
-    inputFile.read (buffer,length);
-    inputFile.close();
-    std::string vtk_input = buffer;
+    setup_globals();
     
-    //Parse the file
-    cout << "Parsing vtk file: " << argv[1] << endl;
-    vtk_file* file = parser::parser((string)buffer).get_vtk_file();
+    singleton_var.data = parser::parser((string)read_file(argv[1])).get_vtk_file();
+    singleton_var.vertex_shader = argv[2];
+    singleton_var.fragment_shader = argv[3];
     
+    glutInitContextVersion (3, 2);
+    glutInitContextFlags (GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
     
-    cout << file->points->size() << endl;
-
-    // Initialize graphics window
     glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH); 
-    //  Or, can use double buffering
-    //  glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); 
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitWindowSize(singleton_var.screen_width,singleton_var.screen_height);
+    glutCreateWindow(argv[0]);
 
-    glutInitWindowSize (256, 256); 
-    glutInitWindowPosition (0, 0);
-    glutCreateWindow (argv[0]);
+    
 
-    // Initialize OpenGL
-    init();
+    /*GLenum glew_status = glewInit();
 
-    // Initialize callback functions
-    glutDisplayFunc(display); 
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
+    if (!GLEW_VERSION_2_0 || glew_status != GLEW_OK)
+    {
+        cout << "Error is " << glewGetErrorString(glew_status) << endl;
+        exit(EXIT_FAILURE);
+    }*/
 
-    // Start rendering 
-    glutMainLoop();
+    if (init_resources())
+    {   
+        glutIdleFunc(idle_func);
+        glutReshapeFunc(onReshape);
+        glutKeyboardFunc(keyboard);
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_LIGHTING);
+        glEnable(GL_RESCALE_NORMAL);
+        glEnable (GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE  );
+        
+
+        glutDisplayFunc(render);
+        glutMainLoop();
+    }
+    else
+    {
+        cout << "Failed to load resources" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    free_resources();
+    return EXIT_SUCCESS;
 }
-

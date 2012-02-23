@@ -7,8 +7,6 @@ find_package(VTK REQUIRED)
 
 INCLUDE (${VTK_USE_FILE})
 
-#find_package(GLEW REQUIRED)
-
 target_link_libraries(vtk vtkHybrid)
 
-target_link_libraries(cgRender ${OPENGL_LIBRARY} ${GLUT_LIBRARY} GLEW)
+target_link_libraries(cgRender ${OPENGL_LIBRARY} ${GLUT_LIBRARY})
