@@ -161,6 +161,13 @@ void buildVectors(vtk_file* data)
     delete(data);
 }
 
+glm::vec3 findNormal(vector<glm::vec3> polyPoints)
+{
+    return polyPoints[0];
+}
+
+
+
 void buildNormals(void)
 {
     vector<glm::vec3> points;
@@ -176,7 +183,17 @@ void buildNormals(void)
             points[i] = (*global.vertex)[poly[i]];
         }
         
-        glm::fastNormalize(glm::cross(c - a, b - a));
+        norm = glm::normalize(findNormal(points));
+        
+        for (int i = 0; i < 3; i++)
+        {
+            global.normals[(int)poly[i]] += norm;
+        }
+    }
+    
+    for (int i = 0; i < (int)global.vertex->size();i++)
+    {
+        global.normals[i] = glm::normalize(global.normals[i]);
     }
 }
 

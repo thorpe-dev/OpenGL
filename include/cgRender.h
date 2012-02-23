@@ -3,11 +3,13 @@
 
 #include <GL/glew.h>
 #include <GL/glut.h>
-#include <glm/glm.hpp>
 
 #include <stdlib.h>
 #include <vector>
 #include <iostream>
+
+#define GLM_SWIZZLE
+#include <glm/glm.hpp>
 
 using namespace std;
 

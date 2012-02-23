@@ -53,15 +53,15 @@ src/CMakeFiles/vtk.dir/cgRender.cpp.o: src/CMakeFiles/vtk.dir/flags.make
 src/CMakeFiles/vtk.dir/cgRender.cpp.o: src/cgRender.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/OpenGL/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/vtk.dir/cgRender.cpp.o"
-	cd /home/michael/Programming/OpenGL/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vtk.dir/cgRender.cpp.o -c /home/michael/Programming/OpenGL/src/cgRender.cpp
+	cd /home/michael/Programming/OpenGL/src && g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vtk.dir/cgRender.cpp.o -c /home/michael/Programming/OpenGL/src/cgRender.cpp
 
 src/CMakeFiles/vtk.dir/cgRender.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vtk.dir/cgRender.cpp.i"
-	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/OpenGL/src/cgRender.cpp > CMakeFiles/vtk.dir/cgRender.cpp.i
+	cd /home/michael/Programming/OpenGL/src && g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/OpenGL/src/cgRender.cpp > CMakeFiles/vtk.dir/cgRender.cpp.i
 
 src/CMakeFiles/vtk.dir/cgRender.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vtk.dir/cgRender.cpp.s"
-	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/OpenGL/src/cgRender.cpp -o CMakeFiles/vtk.dir/cgRender.cpp.s
+	cd /home/michael/Programming/OpenGL/src && g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/OpenGL/src/cgRender.cpp -o CMakeFiles/vtk.dir/cgRender.cpp.s
 
 src/CMakeFiles/vtk.dir/cgRender.cpp.o.requires:
 .PHONY : src/CMakeFiles/vtk.dir/cgRender.cpp.o.requires
