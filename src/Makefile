@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michael/Programming
+CMAKE_SOURCE_DIR = /home/michael/Programming/OpenGL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/michael/Programming
+CMAKE_BINARY_DIR = /home/michael/Programming/OpenGL
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,14 +69,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/michael/Programming && $(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles /home/michael/Programming/src/CMakeFiles/progress.marks
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles 0
+	cd /home/michael/Programming/OpenGL && $(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/OpenGL/CMakeFiles /home/michael/Programming/OpenGL/src/CMakeFiles/progress.marks
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/OpenGL/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -85,22 +85,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/michael/Programming && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/michael/Programming/OpenGL && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/cgRender.dir/rule:
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cgRender.dir/rule
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cgRender.dir/rule
 .PHONY : src/CMakeFiles/cgRender.dir/rule
 
 # Convenience name for target.
@@ -109,12 +109,12 @@ cgRender: src/CMakeFiles/cgRender.dir/rule
 
 # fast build rule for target.
 cgRender/fast:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/build
 .PHONY : cgRender/fast
 
 # Convenience name for target.
 src/CMakeFiles/vtk.dir/rule:
-	cd /home/michael/Programming && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/vtk.dir/rule
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/vtk.dir/rule
 .PHONY : src/CMakeFiles/vtk.dir/rule
 
 # Convenience name for target.
@@ -123,7 +123,7 @@ vtk: src/CMakeFiles/vtk.dir/rule
 
 # fast build rule for target.
 vtk/fast:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/build
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/build
 .PHONY : vtk/fast
 
 GLUT.o: GLUT.cpp.o
@@ -131,7 +131,7 @@ GLUT.o: GLUT.cpp.o
 
 # target to build an object file
 GLUT.cpp.o:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.o
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.o
 .PHONY : GLUT.cpp.o
 
 GLUT.i: GLUT.cpp.i
@@ -139,7 +139,7 @@ GLUT.i: GLUT.cpp.i
 
 # target to preprocess a source file
 GLUT.cpp.i:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.i
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.i
 .PHONY : GLUT.cpp.i
 
 GLUT.s: GLUT.cpp.s
@@ -147,7 +147,7 @@ GLUT.s: GLUT.cpp.s
 
 # target to generate assembly for a file
 GLUT.cpp.s:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.s
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/GLUT.cpp.s
 .PHONY : GLUT.cpp.s
 
 cgRender.o: cgRender.cpp.o
@@ -155,7 +155,7 @@ cgRender.o: cgRender.cpp.o
 
 # target to build an object file
 cgRender.cpp.o:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.o
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.o
 .PHONY : cgRender.cpp.o
 
 cgRender.i: cgRender.cpp.i
@@ -163,7 +163,7 @@ cgRender.i: cgRender.cpp.i
 
 # target to preprocess a source file
 cgRender.cpp.i:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.i
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.i
 .PHONY : cgRender.cpp.i
 
 cgRender.s: cgRender.cpp.s
@@ -171,7 +171,7 @@ cgRender.s: cgRender.cpp.s
 
 # target to generate assembly for a file
 cgRender.cpp.s:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.s
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/vtk.dir/build.make src/CMakeFiles/vtk.dir/cgRender.cpp.s
 .PHONY : cgRender.cpp.s
 
 parser.o: parser.cpp.o
@@ -179,7 +179,7 @@ parser.o: parser.cpp.o
 
 # target to build an object file
 parser.cpp.o:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.o
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.o
 .PHONY : parser.cpp.o
 
 parser.i: parser.cpp.i
@@ -187,7 +187,7 @@ parser.i: parser.cpp.i
 
 # target to preprocess a source file
 parser.cpp.i:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.i
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.i
 .PHONY : parser.cpp.i
 
 parser.s: parser.cpp.s
@@ -195,7 +195,7 @@ parser.s: parser.cpp.s
 
 # target to generate assembly for a file
 parser.cpp.s:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.s
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.s
 .PHONY : parser.cpp.s
 
 shader_utils.o: shader_utils.cpp.o
@@ -203,7 +203,7 @@ shader_utils.o: shader_utils.cpp.o
 
 # target to build an object file
 shader_utils.cpp.o:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
 .PHONY : shader_utils.cpp.o
 
 shader_utils.i: shader_utils.cpp.i
@@ -211,7 +211,7 @@ shader_utils.i: shader_utils.cpp.i
 
 # target to preprocess a source file
 shader_utils.cpp.i:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.i
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.i
 .PHONY : shader_utils.cpp.i
 
 shader_utils.s: shader_utils.cpp.s
@@ -219,7 +219,7 @@ shader_utils.s: shader_utils.cpp.s
 
 # target to generate assembly for a file
 shader_utils.cpp.s:
-	cd /home/michael/Programming && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.s
+	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.s
 .PHONY : shader_utils.cpp.s
 
 # Help Target
@@ -255,6 +255,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/michael/Programming && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/michael/Programming/OpenGL && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

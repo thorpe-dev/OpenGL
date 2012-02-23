@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/michael/Programming/src/cgRender.cpp
+/home/michael/Programming/OpenGL/src/cgRender.cpp
 vtkGenericDataObjectReader.h
 -
 vtkSmartPointer.h

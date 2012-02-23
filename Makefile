@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michael/Programming
+CMAKE_SOURCE_DIR = /home/michael/Programming/OpenGL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/michael/Programming
+CMAKE_BINARY_DIR = /home/michael/Programming/OpenGL
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles /home/michael/Programming/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/OpenGL/CMakeFiles /home/michael/Programming/OpenGL/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michael/Programming/OpenGL/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

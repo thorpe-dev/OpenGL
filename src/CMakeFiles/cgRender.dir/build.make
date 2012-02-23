@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michael/Programming
+CMAKE_SOURCE_DIR = /home/michael/Programming/OpenGL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/michael/Programming
+CMAKE_BINARY_DIR = /home/michael/Programming/OpenGL
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/cgRender.dir/depend.make
@@ -51,17 +51,17 @@ include src/CMakeFiles/cgRender.dir/flags.make
 
 src/CMakeFiles/cgRender.dir/GLUT.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/GLUT.cpp.o: src/GLUT.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/OpenGL/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/GLUT.cpp.o"
-	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/GLUT.cpp.o -c /home/michael/Programming/src/GLUT.cpp
+	cd /home/michael/Programming/OpenGL/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/GLUT.cpp.o -c /home/michael/Programming/OpenGL/src/GLUT.cpp
 
 src/CMakeFiles/cgRender.dir/GLUT.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/GLUT.cpp.i"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/GLUT.cpp > CMakeFiles/cgRender.dir/GLUT.cpp.i
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/OpenGL/src/GLUT.cpp > CMakeFiles/cgRender.dir/GLUT.cpp.i
 
 src/CMakeFiles/cgRender.dir/GLUT.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/GLUT.cpp.s"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/GLUT.cpp -o CMakeFiles/cgRender.dir/GLUT.cpp.s
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/OpenGL/src/GLUT.cpp -o CMakeFiles/cgRender.dir/GLUT.cpp.s
 
 src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires:
 .PHONY : src/CMakeFiles/cgRender.dir/GLUT.cpp.o.requires
@@ -74,17 +74,17 @@ src/CMakeFiles/cgRender.dir/GLUT.cpp.o.provides.build: src/CMakeFiles/cgRender.d
 
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/parser.cpp.o: src/parser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/OpenGL/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/parser.cpp.o"
-	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/parser.cpp.o -c /home/michael/Programming/src/parser.cpp
+	cd /home/michael/Programming/OpenGL/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/parser.cpp.o -c /home/michael/Programming/OpenGL/src/parser.cpp
 
 src/CMakeFiles/cgRender.dir/parser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/parser.cpp.i"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/parser.cpp > CMakeFiles/cgRender.dir/parser.cpp.i
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/OpenGL/src/parser.cpp > CMakeFiles/cgRender.dir/parser.cpp.i
 
 src/CMakeFiles/cgRender.dir/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/parser.cpp.s"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/parser.cpp -o CMakeFiles/cgRender.dir/parser.cpp.s
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/OpenGL/src/parser.cpp -o CMakeFiles/cgRender.dir/parser.cpp.s
 
 src/CMakeFiles/cgRender.dir/parser.cpp.o.requires:
 .PHONY : src/CMakeFiles/cgRender.dir/parser.cpp.o.requires
@@ -97,17 +97,17 @@ src/CMakeFiles/cgRender.dir/parser.cpp.o.provides.build: src/CMakeFiles/cgRender
 
 src/CMakeFiles/cgRender.dir/shader_utils.cpp.o: src/CMakeFiles/cgRender.dir/flags.make
 src/CMakeFiles/cgRender.dir/shader_utils.cpp.o: src/shader_utils.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/michael/Programming/OpenGL/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/cgRender.dir/shader_utils.cpp.o"
-	cd /home/michael/Programming/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/shader_utils.cpp.o -c /home/michael/Programming/src/shader_utils.cpp
+	cd /home/michael/Programming/OpenGL/src && clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cgRender.dir/shader_utils.cpp.o -c /home/michael/Programming/OpenGL/src/shader_utils.cpp
 
 src/CMakeFiles/cgRender.dir/shader_utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgRender.dir/shader_utils.cpp.i"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/src/shader_utils.cpp > CMakeFiles/cgRender.dir/shader_utils.cpp.i
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/michael/Programming/OpenGL/src/shader_utils.cpp > CMakeFiles/cgRender.dir/shader_utils.cpp.i
 
 src/CMakeFiles/cgRender.dir/shader_utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgRender.dir/shader_utils.cpp.s"
-	cd /home/michael/Programming/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/src/shader_utils.cpp -o CMakeFiles/cgRender.dir/shader_utils.cpp.s
+	cd /home/michael/Programming/OpenGL/src && clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/michael/Programming/OpenGL/src/shader_utils.cpp -o CMakeFiles/cgRender.dir/shader_utils.cpp.s
 
 src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires:
 .PHONY : src/CMakeFiles/cgRender.dir/shader_utils.cpp.o.requires
@@ -142,7 +142,7 @@ bin/cgRender: /usr/lib/i386-linux-gnu/libXi.so
 bin/cgRender: src/CMakeFiles/cgRender.dir/build.make
 bin/cgRender: src/CMakeFiles/cgRender.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/cgRender"
-	cd /home/michael/Programming/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cgRender.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/michael/Programming/OpenGL/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cgRender.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/cgRender.dir/build: bin/cgRender
@@ -154,10 +154,10 @@ src/CMakeFiles/cgRender.dir/requires: src/CMakeFiles/cgRender.dir/shader_utils.c
 .PHONY : src/CMakeFiles/cgRender.dir/requires
 
 src/CMakeFiles/cgRender.dir/clean:
-	cd /home/michael/Programming/src && $(CMAKE_COMMAND) -P CMakeFiles/cgRender.dir/cmake_clean.cmake
+	cd /home/michael/Programming/OpenGL/src && $(CMAKE_COMMAND) -P CMakeFiles/cgRender.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/cgRender.dir/clean
 
 src/CMakeFiles/cgRender.dir/depend:
-	cd /home/michael/Programming && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michael/Programming /home/michael/Programming/src /home/michael/Programming /home/michael/Programming/src /home/michael/Programming/src/CMakeFiles/cgRender.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michael/Programming/OpenGL && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michael/Programming/OpenGL /home/michael/Programming/OpenGL/src /home/michael/Programming/OpenGL /home/michael/Programming/OpenGL/src /home/michael/Programming/OpenGL/src/CMakeFiles/cgRender.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/cgRender.dir/depend
 

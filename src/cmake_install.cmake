@@ -1,4 +1,4 @@
-# Install script for directory: /home/michael/Programming/src
+# Install script for directory: /home/michael/Programming/OpenGL/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

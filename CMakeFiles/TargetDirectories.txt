@@ -1,2 +1,2 @@
-/home/michael/Programming/src/CMakeFiles/cgRender.dir
-/home/michael/Programming/src/CMakeFiles/vtk.dir
+/home/michael/Programming/OpenGL/src/CMakeFiles/cgRender.dir
+/home/michael/Programming/OpenGL/src/CMakeFiles/vtk.dir

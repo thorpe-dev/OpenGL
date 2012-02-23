@@ -9,4 +9,4 @@ INCLUDE (${VTK_USE_FILE})
 
 target_link_libraries(vtk vtkHybrid)
 
-target_link_libraries(cgRender ${OPENGL_LIBRARY} ${GLUT_LIBRARY})
+target_link_libraries(cgRender ${OPENGL_LIBRARY} ${GLUT_LIBRARY} GLEW)

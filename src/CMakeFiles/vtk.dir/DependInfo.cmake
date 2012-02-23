@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/michael/Programming/src/cgRender.cpp" "/home/michael/Programming/src/CMakeFiles/vtk.dir/cgRender.cpp.o"
+  "/home/michael/Programming/OpenGL/src/cgRender.cpp" "/home/michael/Programming/OpenGL/src/CMakeFiles/vtk.dir/cgRender.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

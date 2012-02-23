@@ -1,22 +1,13 @@
 #include <shader_utils.h>
-#include <GL/glut.h>
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+
 
 using namespace std;
 
-
-template <typename T>
-T * vector_to_array(vector<T>* v)
-{
-    int size = v->size();
-    T* ret = new T[size];
-    
-    for (int i = 0; i < size / 3; i++)
-    {
-        ret[i] = (*v)[i];
-    }
-    
-    return ret;
-}
 
 // Debug function
 void print_log(GLuint object)
