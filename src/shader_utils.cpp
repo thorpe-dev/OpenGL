@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 // Debug function
 void print_log(GLuint object)
 {
@@ -41,6 +40,8 @@ string read_file(char* fname)
     ifstream t(fname);
     stringstream* buffer = new stringstream();
     *buffer << t.rdbuf();
+    
+    t.close();
         
     return buffer->str();
 }

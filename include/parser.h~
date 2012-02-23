@@ -2,18 +2,20 @@
 #define _PARSER_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
 struct vtk_file
 {
     int point_count;
-    int polygon_size;
     int polygon_no;
+    int texture_count;
 
-    vector<float>* points;
-    vector<short>* polygons;
-    vector<float>* point_data;
+    vector<glm::vec3> vertex;
+    vector<glm::vec3> normals;
+    vector<glm::vec3> polygons
+    vector<glm::vec2> tex;
 };
 
 class parser

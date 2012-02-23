@@ -5,19 +5,18 @@
 //global variables
 static struct {
     
-    vtk_file* data;
+    vector<glm::vec3>* vertex;
+    vector<glm::vec3>* normals;
+    vector<glm::vec3>* polygons;
+    vector<glm::vec2>* tex;
     
     int width,height;
-    
-    GLuint program;
-    GLuint vertexBuffer;
     
     
 } global;
 
 void setupGlobal(void)
 {
-    global.data = NULL;
     global.width = 256;
     global.height = 256;
 }
@@ -27,66 +26,164 @@ void display()
     glClearColor(0.0f,0.0f,0.0f,0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    glUseProgram(global.program);
+    glm::vec3 poly;
     
-    glUniform2f(uniform_off,0.5f,0.25f);
+    for (int i = 0; i < (int)global.polygons->size(); i++)
+    {
+        poly = (*global.polygons)[i];
+        
+        glBegin(GL_TRIANGLES);
+        
+        glVertex3fv(&(*global.vertex)[poly[0]][0]);
+        glVertex3fv(&(*global.vertex)[poly[1]][0]);
+        glVertex3fv(&(*global.vertex)[poly[2]][0]);
+        
+        glEnd();
+    }
     
-    glBindBuffer(GL_ARRAY_BUFFER, global.vertexBuffer);
+    glFlush();
     
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,0);
-    glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)color);
-    
-    glDrawArrays(GL_TRIANGLE,0,global.data->vertices->size());
+    glutPostRedisplay();
 }
 
-void reshape()
+void reshape (int x, int y)
 {
-    
+  glViewport (0, 0, x, y); 
+  
+  glMatrixMode (GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(1.57, 1, 0.1, 100); /* 1.57 is ~90 degrees */
+
+  //refreshPositions();
 }
 
-void keyboard();
+void keyboard(unsigned char key, int, int)
 {
-    
+    switch (key)
+    {
+        case 'q' : case 'Q':
+            exit(EXIT_SUCCESS);
+            break;
+    }
 }
 
+void buildVectors(vtk_file* data)
+{
+    vector<glm::vec3> vertex = vector<glm::vec3>(data->point_count);
+    vector<glm::vec3> normals = vector<glm::vec3>(data->point_count);
+    vector<glm::vec3> polygons = vector<glm::vec3>(data->polygon_no);
+    vector<glm::vec2> tex = vector<glm::vec2>(data->texture_count);
+    
+    cout << "Allocated vectors" << endl;
+    glm::vec3 vert;
+    glm::vec3 norm;
+    glm::vec3 poly;
+    glm::vec2 t;
+    
+    int i,j = 0;
+    while( j < (int)data->points->size())
+    {
+        //cout << i << "," << j << endl;
+        vert = glm::vec3(
+            (*data->points)[j++],
+            (*data->points)[j++],
+            (*data->points)[j++]
+        );
+        
+        vertex[i] = vert;
+        
+        norm = glm::vec3(0.0,0.0,0.0);
+        normals[i] = norm;
+        ++i;
+    }
+    
+    cout << "Points data addded to vector" << endl;
+    
+    i = 0;
+    while (j < (int)data->polygons->size())
+    {
+        poly = glm::vec3(
+            (*data->polygons)[j++],
+            (*data->polygons)[j++],
+            (*data->polygons)[j++]
+        );
+        
+        polygons[i] = poly;
+        
+        i++;
+    }
+    cout << "Polygon data added to vector" << endl;
+    i = 0;
+    
+    for(j = 0; j < (int)data->point_data->size(); j+=2)
+    {
+        t = glm::vec2(
+            (*data->point_data)[j*2],
+            (*data->point_data)[j*2 + 1]
+        );
+    }
+    
+    cout << "Texture data added to vector" << endl;
+    
+    global.vertex = &vertex;
+    global.normals = &normals;
+    global.polygons = &polygons;
+    global.tex = &tex;
+    
+    delete(data);
+}
 
+void buildNormals(void)
+{
+}
 
-
-
-
-
+void init()
+{
+    cout << "Initialising" << endl;
+    glClearColor(0.0f,0.0f,0.0f,0.0f);
+    
+    glShadeModel(GL_FLAT);
+    
+    GLfloat position[4] = {-20.0f, 20.0f, 100.0f, 0.0f};
+    const GLfloat ambient[4] = {0.1f,0.1f,0.1f,1.0f};
+    const GLfloat diffuse[4] = {0.8f, 0.8f, 0.8f, 1.0f};
+    const GLfloat spec[4] = {1.0f,1.0f,1.0f,1.0f};
+    
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    
+    glLightfv(GL_LIGHT0,GL_POSITION,position);
+    glLightfv(GL_LIGHT0,GL_AMBIENT,ambient);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,diffuse);
+    glLightfv(GL_LIGHT0,GL_SPECULAR,spec);
+    
+    glEnable(GL_DEPTH_TEST);
+}
 
 int main(int argc, char** argv)
 {
     // Check input arguments
     // and print a usage on failure
-    if (argc != 5)
+    if (argc != 3)
     {
         cout << "Usage: " << argv[0] << "and then a .vtk file, "
-            << "followed by  the path to the vertex shader and fragment_shader "
-            << " lastly 1 (meaning Gourand rendered "
-            << "or 2 (meaning texture mapped render)" << endl;
+            << "then a texture file" << endl;
         exit(EXIT_FAILURE);
     }
     
     setupGlobal();
     
-    global.data = parser::parser((string)read_file(argv[1])).get_vtk_file();
-    
+    vtk_file* data = parser::parser((string)read_file(argv[1])).get_vtk_file();    
     glutInit(&argc,argv);
     
-    glutInitDisplayMode(GLUT_DOUBLE|GLUT_ALPHA|GLUT_DEPTH);
-    glutInitContextVersion(3,3);
-    glutInitContextProfile(GLUT_CORE_PROFILE);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_DEPTH|GLUT_RGB);
     
     glutInitWindowSize(global.width,global.height);
     
     glutCreateWindow(argv[0]);
     
-    LoadFunctions();
+    cout << "Building vectors" << endl;
+    buildVectors(data);
     
     init();
     

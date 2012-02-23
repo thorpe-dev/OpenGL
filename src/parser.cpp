@@ -21,7 +21,7 @@
         
         vtk_file* input = (vtk_file*)malloc(sizeof(struct vtk_file));
         vector<float>* points = new vector<float>;
-        vector<short>* polygons = new vector<short>;
+        vector<int>* polygons = new vector<int>;
         vector<float>* texture = new vector<float>;
 
         
@@ -57,7 +57,6 @@
         // Get polygon data
         int polygon_no = lexical_cast<int>(*beg);
         beg++;
-        int polygon_size = lexical_cast<int>(*beg);
         beg++;
 
         // While the token is not point_data, add polygons to vector
@@ -68,14 +67,16 @@
         while (*beg != "POINT_DATA")
         {
             if (count % 4 != 0)
-                polygons->push_back(lexical_cast<short>(*beg));
+                polygons->push_back(lexical_cast<int>(*beg));
             beg++;
             count++;
         }
+        
+        beg++;
+        
+        int texture_count = lexical_cast<int>(*beg++);
 
         // Move iterator into position
-        beg++;
-        beg++;
         beg++;
         beg++;
         beg++;
@@ -90,8 +91,8 @@
         
         // Set up vtk struct
         input->point_count = point_count;
-        input->polygon_size = polygon_size;
         input->polygon_no = polygon_no;
+        input->texture_count = texture_count;
 
         input->points = points;
         input->polygons = polygons;

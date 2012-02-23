@@ -12,6 +12,8 @@ static struct {
     GLint uniform_mvp;
     vtk_file* data;
     
+    char* vertex_shader;
+    char* fragment_shader;
     GLuint vbo_vertices;
     GLuint ibo_poly;
     GLint location;

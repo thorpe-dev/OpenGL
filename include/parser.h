@@ -9,11 +9,11 @@ using namespace std;
 struct vtk_file
 {
     int point_count;
-    int polygon_size;
     int polygon_no;
+    int texture_count;
 
     vector<float>* points;
-    vector<short>* polygons;
+    vector<int>* polygons;
     vector<float>* point_data;
 };
 
