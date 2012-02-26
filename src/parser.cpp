@@ -2,6 +2,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <string>
+#include <fstream>
 
 //include "cgRender.h"
 #include "parser.h"
@@ -10,15 +11,35 @@
     using namespace std;
     using namespace boost;
     
-    parser::parser(string s)
+    parser::parser(char* s, bool b)
     {
-        vtk = parse_vtk_file(s);
+        if (b) 
+        {
+            vtk = parse_vtk_file(s);
+            ppm = NULL;
+        }
+        else 
+        {
+            vtk = NULL;
+            ppm = parse_ppm_file(s);
+        }
     }
     
-    vtk_file* parser::parse_vtk_file(string s)
+    ppm_file* parser::parse_ppm_file(char* s)
+    {
+        ppm_file* input = (ppm_file*)malloc(sizeof(struct ppm_file));
+        
+        ifstream file(s);
+        
+        
+        
+        return input;
+    }
+    
+    vtk_file* parser::parse_vtk_file(char* d)
     {
         // Allocate memory for vtk_file struct and vectors
-        
+        string s = d;
         vtk_file* input = (vtk_file*)malloc(sizeof(struct vtk_file));
         vector<float>* points = new vector<float>;
         vector<int>* polygons = new vector<int>;

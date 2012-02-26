@@ -15,8 +15,8 @@ static struct {
 
 void setupGlobal(void)
 {
-    global.width = 256;
-    global.height = 256;
+    global.width = 512;
+    global.height = 512;
     float cam[3] = {4.3f,4.2f,-5.1f};
     float centre[3] = {0.06f,-0.13f,-0.08f};
     global.cam = new vector<float>(cam, cam + sizeof(cam)/sizeof(float));
@@ -26,7 +26,7 @@ void setupGlobal(void)
 void display()
 {
     glClearColor(0.0f,0.0f,0.0f,0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glm::vec3 poly;
 
@@ -34,16 +34,18 @@ void display()
     {
         poly = (*global.polygons)[i];
 
-        glBegin(GL_TRIANGLES);
-
-        glNormal3fv(glm::value_ptr((*global.normals)[poly[0]]));
-        //glVertex3fv(glm::value_ptr((*global.vertex)[poly[1]]));
-        glVertex3fv(glm::value_ptr((*global.vertex)[poly[2]]));
-
+        glBegin(GL_POLYGON);
+        
+        for (int j = 0; j < 3; j++)
+        {
+            glNormal3fv(glm::value_ptr((*global.normals)[poly[j]]));
+            //glVertex3fv(glm::value_ptr((*global.vertex)[poly[j]]));
+            glVertex3fv(glm::value_ptr((*global.vertex)[poly[j]]));
+        }
         glEnd();
     }
 
-    //glFlush();
+    glFlush();
 
     glutPostRedisplay();
 }
@@ -60,7 +62,6 @@ void reload()
 
 inline float to_radians(float degrees)
 {
-    cout << (4 * atan(1) * degrees / 180) << endl;
     return (4 * atan(1) * degrees / 180);
 }
 
@@ -92,7 +93,8 @@ void buildVectors(vtk_file* data)
     vector<glm::vec3> polygons = vector<glm::vec3>(data->polygon_no);
     vector<glm::vec2> tex = vector<glm::vec2>(data->texture_count);
 
-    cout << "Allocated vectors" << endl;
+    cout << "Allocated vectors" << endl << endl;
+    
     glm::vec3 vert;
     glm::vec3 norm;
     glm::vec3 poly;
@@ -153,8 +155,8 @@ void buildVectors(vtk_file* data)
 
 glm::vec3 findNormal(vector<glm::vec3> polyPoints)
 {
-    return glm::normalize(glm::cross(polyPoints[2] - polyPoints[0], 
-                polyPoints[1] - polyPoints[0]));
+    return (glm::normalize(glm::cross(polyPoints[2] - polyPoints[0], 
+                polyPoints[1] - polyPoints[0])));
 }
 
 
@@ -191,14 +193,17 @@ void buildNormals(void)
 void init()
 {
     cout << "Initialising" << endl;
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
+    glClearColor(0.0,0.0,0.0,0.0);
 
     glShadeModel(GL_FLAT);
+    
+//     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     GLfloat position[4] = {-20.0f, 20.0f, 100.0f, 0.0f};
     const GLfloat ambient[4] = {0.1f,0.1f,0.1f,1.0f};
     const GLfloat diffuse[4] = {0.8f, 0.8f, 0.8f, 1.0f};
     const GLfloat spec[4] = {1.0f,1.0f,1.0f,1.0f};
+    
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -209,7 +214,7 @@ void init()
     glLightfv(GL_LIGHT0,GL_SPECULAR,spec);
 
     glEnable(GL_DEPTH_TEST);
-    glEnable (GL_TEXTURE_2D);
+//     glEnable (GL_TEXTURE_2D);
 }
 
 int main(int argc, char** argv)
@@ -225,17 +230,20 @@ int main(int argc, char** argv)
 
     setupGlobal();
 
-    vtk_file* data = parser::parser((string)read_file(argv[1])).get_vtk_file();   
+    vtk_file* vtk = parser::parser((char*)read_file(argv[1]).c_str(),true).get_vtk_file();
+    ppm_file* ppm = parser::parser(argv[2],false).get_ppm_file();
     glutInit(&argc,argv);
 
-    glutInitDisplayMode(GLUT_DOUBLE|GLUT_DEPTH|GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_DEPTH|GLUT_RGB);
 
     glutInitWindowSize(global.width,global.height);
+    
+    glutInitWindowPosition(256,256);
 
     glutCreateWindow(argv[0]);
 
     cout << "Building vectors" << endl;
-    buildVectors(data);
+    buildVectors(vtk);
 
     init();
 
