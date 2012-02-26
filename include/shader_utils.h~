@@ -5,15 +5,17 @@
 #include <string>
 #include <stdlib.h>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <math.h>
 
 
 using namespace std;
 
+float to_radians(float degrees);
 void print_log(GLuint object);
 string read_file(char* fname);
 GLuint shader_create(char* fname, GLenum type);
-
-// template<typename T>
-// T * vector_to_array(vector<T>* v);
 
 #endif

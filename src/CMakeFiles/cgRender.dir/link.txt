@@ -1,1 +1,1 @@
-g++    -g -Wall -Wextra -std=c++0x  -Wno-deprecated     CMakeFiles/cgRender.dir/GLUT.cpp.o CMakeFiles/cgRender.dir/parser.cpp.o CMakeFiles/cgRender.dir/shader_utils.cpp.o  -o ../bin/cgRender -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi -lGLEW 
+clang++    -g -Wall -Wextra -finline-functions  -Wno-deprecated     CMakeFiles/cgRender.dir/GLUT.cpp.o CMakeFiles/cgRender.dir/parser.cpp.o CMakeFiles/cgRender.dir/shader_utils.cpp.o  -o ../bin/cgRender -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi -lGLEW 

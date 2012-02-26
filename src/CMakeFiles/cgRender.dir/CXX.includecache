@@ -7,14 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/michael/Programming/OpenGL/src/GLUT.cpp
-parser.h
--
 cgRender.h
--
-shader_utils.h
--
-math.h
--
-boost/foreach.hpp
 -
 

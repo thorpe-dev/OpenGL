@@ -1,12 +1,12 @@
 #include <shader_utils.h>
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+
 
 
 
 using namespace std;
+
+
 
 // Debug function
 void print_log(GLuint object)
