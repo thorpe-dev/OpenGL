@@ -35,16 +35,7 @@ void print_log(GLuint object)
   free(log);
 }
 
-string read_file(char* fname)
-{
-    ifstream t(fname);
-    stringstream* buffer = new stringstream();
-    *buffer << t.rdbuf();
-    
-    t.close();
-        
-    return buffer->str();
-}
+
 
 GLuint shader_create(char* fname, GLenum type)
 {

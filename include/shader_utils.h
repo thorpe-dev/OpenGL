@@ -14,7 +14,6 @@
 using namespace std;
 
 void print_log(GLuint object);
-string read_file(char* fname);
 GLuint shader_create(char* fname, GLenum type);
 
 #endif

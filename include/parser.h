@@ -9,12 +9,12 @@ using namespace std;
 struct vtk_file
 {
     int point_count;
-    int polygon_no;
+    int polygon_count;
     int texture_count;
 
     vector<float>* points;
     vector<int>* polygons;
-    vector<float>* point_data;
+    vector<float>* textures;
 };
 
 struct ppm_file
@@ -31,7 +31,7 @@ class parser
 public:
     
     parser(char* s,bool b);
-    
+
     vtk_file* get_vtk_file() {return vtk;}
     ppm_file* get_ppm_file() {return ppm;}
     
@@ -41,6 +41,8 @@ private:
     ppm_file* ppm;
     vtk_file* parse_vtk_file(char* s);
     ppm_file* parse_ppm_file(char* s);
+    string read_file(char* fname);
+
     parser() {} // private constructor
 };
 

@@ -1,4 +1,4 @@
-add_executable(cgRender GLUT.cpp parser.cpp shader_utils.cpp)
+add_executable(cgRender GLUT.cpp parser.cpp)
 add_executable(vtk cgRender.cpp)
 
 find_package(OpenGL REQUIRED)

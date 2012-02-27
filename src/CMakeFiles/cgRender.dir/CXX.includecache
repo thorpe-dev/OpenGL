@@ -10,17 +10,3 @@
 cgRender.h
 -
 
-/home/michael/Programming/OpenGL/src/parser.cpp
-boost/tokenizer.hpp
--
-boost/lexical_cast.hpp
--
-boost/algorithm/string.hpp
--
-string
--
-fstream
--
-parser.h
-/home/michael/Programming/OpenGL/src/parser.h
-

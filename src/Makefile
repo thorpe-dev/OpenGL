@@ -198,30 +198,6 @@ parser.cpp.s:
 	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/parser.cpp.s
 .PHONY : parser.cpp.s
 
-shader_utils.o: shader_utils.cpp.o
-.PHONY : shader_utils.o
-
-# target to build an object file
-shader_utils.cpp.o:
-	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.o
-.PHONY : shader_utils.cpp.o
-
-shader_utils.i: shader_utils.cpp.i
-.PHONY : shader_utils.i
-
-# target to preprocess a source file
-shader_utils.cpp.i:
-	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.i
-.PHONY : shader_utils.cpp.i
-
-shader_utils.s: shader_utils.cpp.s
-.PHONY : shader_utils.s
-
-# target to generate assembly for a file
-shader_utils.cpp.s:
-	cd /home/michael/Programming/OpenGL && $(MAKE) -f src/CMakeFiles/cgRender.dir/build.make src/CMakeFiles/cgRender.dir/shader_utils.cpp.s
-.PHONY : shader_utils.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -241,9 +217,6 @@ help:
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
-	@echo "... shader_utils.o"
-	@echo "... shader_utils.i"
-	@echo "... shader_utils.s"
 .PHONY : help
 
 

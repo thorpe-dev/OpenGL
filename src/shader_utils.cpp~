@@ -6,12 +6,7 @@
 
 using namespace std;
 
-inline float to_radians(float degrees)
-{
-    cout << (4 * atan(1) * degrees / 180) << endl;
-    return (4 * atan(1) * degrees / 180);
 
-}
 
 // Debug function
 void print_log(GLuint object)
