@@ -3,19 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <glm/glm.hpp>
 
 using namespace std;
-
-struct vtk_file
-{
-    int point_count;
-    int polygon_count;
-    int texture_count;
-
-    vector<float>* points;
-    vector<int>* polygons;
-    vector<float>* textures;
-};
 
 struct ppm_file
 {
@@ -26,24 +16,8 @@ struct ppm_file
     char* texture;
 };
 
-class parser
-{
-public:
-    
-    parser(char* s,bool b);
-
-    vtk_file* get_vtk_file() {return vtk;}
-    ppm_file* get_ppm_file() {return ppm;}
-    
-private:
-    
-    vtk_file* vtk;
-    ppm_file* ppm;
-    vtk_file* parse_vtk_file(char* s);
-    ppm_file* parse_ppm_file(char* s);
-    string read_file(char* fname);
-
-    parser() {} // private constructor
-};
+void parse_vtk_file(char* d, vector<glm::vec3> &points, vector<glm::vec3> &normals, vector<glm::vec3> &polygons, vector<glm::vec2> &textures);
+ppm_file* parse_ppm_file(char* s);
+string read_file(char* fname);
 
 #endif

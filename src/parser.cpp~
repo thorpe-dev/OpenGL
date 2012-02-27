@@ -11,21 +11,7 @@
     using namespace std;
     using namespace boost;
     
-    parser::parser(char* s, bool b)
-    {
-        if (b) 
-        {
-            vtk = parse_vtk_file(s);
-            ppm = NULL;
-        }
-        else 
-        {
-            vtk = NULL;
-            ppm = parse_ppm_file(s);
-        }
-    }
-    
-    ppm_file* parser::parse_ppm_file(char* s)
+    ppm_file* parse_ppm_file(char* s)
     {
         ppm_file* input = (ppm_file*)malloc(sizeof(struct ppm_file));
         
@@ -53,7 +39,7 @@
         return input;
     }
     
-    string parser::read_file(char* fname)
+    string read_file(char* fname)
     {
         ifstream t(fname);
         stringstream* buffer = new stringstream();
@@ -64,14 +50,11 @@
         return buffer->str();
     }
     
-    vtk_file* parser::parse_vtk_file(char* d)
+    void parse_vtk_file(char* d, vector<glm::vec3> &points, vector<glm::vec3> &normals, vector<glm::vec3> &polygons, vector<glm::vec2> &textures)
     {
         // Allocate memory for vtk_file struct and vectors
         string s = read_file(d);
-        vtk_file* input = (vtk_file*)malloc(sizeof(struct vtk_file));
-        vector<float> points = new vector<float>;
-        vector<int> polygons = new vector<int>;
-        vector<float> texture = new vector<float>;
+   
 
         
         // Set up tokenizer
@@ -91,36 +74,55 @@
 
         // Get number of points
         int point_count = lexical_cast<int>(*beg++);
+        
+        points = vector<glm::vec3>(point_count);
+        normals = vector<glm::vec3>(point_count);
+        
+        glm::vec3 point;
+        glm::vec3 norm;
 
         beg++;
+        
+        int i;
 
         // While the token is not polygons, add points to vector
         cout << "Parsing point data" << endl;
         while(*beg != "POLYGONS")
         {
-            points->push_back(lexical_cast<float>(*beg++));
+            point = glm::vec3(
+                lexical_cast<float>(*beg++),
+                lexical_cast<float>(*beg++),
+                lexical_cast<float>(*beg++));
+            points[i] = point;
+            norm = glm::vec3(0.0f,0.0f,0.0f);
+            normals[i] = norm;
+            i++;
         }
 
         beg++;
         
         // Get polygon data
-        int polygon_count = lexical_cast<int>(*beg);
-        beg++;
-        beg++;
-
-        // While the token is not point_data, add polygons to vector
-        // We're going to drop every 4th element - the number of points making up the polygon
+        int polygon_count = lexical_cast<int>(*beg++);
         
+        beg++;
+        
+        polygons = vector<glm::vec3>(polygon_count);
+        
+        glm::vec3 poly;
+
         cout << "Parsing polygon data" << endl;
-        int count = 0;
+
+        int j = 0;
         while (*beg != "POINT_DATA")
         {
-            if ((count % 4) != 0)
-            {
-                polygons->push_back(lexical_cast<int>(*beg));
-            }
             beg++;
-            count++;
+            poly = glm::vec3(
+                lexical_cast<float>(*beg++),
+                lexical_cast<float>(*beg++),
+                lexical_cast<float>(*beg++)
+            );
+            polygons[j] = poly;
+            j++;
         }
         
         beg++;
@@ -133,23 +135,23 @@
         beg++;
         beg++;
         
+        textures = vector<glm::vec2>(texture_count);
+        
+        cout << "Allocated" << endl;
+        int k = 0;
+        glm::vec2 t;
         //While the token is not at the end, add texture data to vector
         cout << "Parsing texture data" << endl;
         while (beg != tok.end())
         {
-            texture->push_back(lexical_cast<float>(*beg++));
-        }
-        
-        // Set up vtk struct
-        input->point_count = point_count;
-        input->polygon_count = polygon_count;
-        input->texture_count = texture_count;
-
-        input->points = points;
-        input->polygons = polygons;
-        input->textures = texture;
-        
+            cout << k << endl;
+            t = glm::vec2(
+                lexical_cast<float>(*beg++),
+                lexical_cast<float>(*beg++)
+            );
+            textures[k] = t;
+            k++;
+            
+        }        
         cout << "Parsing complete" << endl;
-
-        return input;
     }

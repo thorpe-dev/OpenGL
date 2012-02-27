@@ -2,13 +2,13 @@
 
 //global variables
 static struct {
-
-    vector<glm::vec3> vertex;
-    vector<glm::vec3> normals;
-    vector<glm::vec3> polygons;
-    vector<glm::vec2> tex;
     
     ppm_file* ppm;
+    
+    vector<glm::vec3> points;
+    vector<glm::vec3> normals;
+    vector<glm::vec3> polygons;
+    vector<glm::vec2> textures;
 
     int width,height;
     float* cam;
@@ -40,9 +40,8 @@ void display()
         
         for (int j = 0; j < 3; j++)
         {
-//             glNormal3fv(glm::value_ptr((global.normals)[poly[j]]));
-//             glVertex3fv(glm::value_ptr((*global.vertex)[poly[j]]));
-            glVertex3fv(glm::value_ptr((global.vertex)[poly[j]]));
+            glNormal3fv(glm::value_ptr((global.normals)[poly[j]]));
+            glVertex3fv(glm::value_ptr((global.points)[poly[j]]));
         }
         glEnd();
     }
@@ -74,7 +73,6 @@ void reshape (int x, int y)
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(100, (float) x / (float) y, 0.1, 1.2);
-//     gluPerspective(to_radians(90), 1, 0.1, 100);
 
     reload();
 }
@@ -126,74 +124,6 @@ void keyboard(unsigned char key, int, int)
 
 }
 
-void buildVectors(vtk_file* data)
-{
-    vector<glm::vec3> vertex = vector<glm::vec3>(data->point_count);
-    vector<glm::vec3> normals = vector<glm::vec3>(data->point_count);
-    vector<glm::vec3> polygons = vector<glm::vec3>(data->polygon_count);
-    vector<glm::vec2> tex = vector<glm::vec2>(data->texture_count);
-
-    cout << "Allocated vectors" << endl << endl;
-    
-    glm::vec3 vert;
-    glm::vec3 norm;
-    glm::vec3 poly;
-    glm::vec2 t;
-
-    int i,j = 0;
-    while( j < (int)data->points->size())
-    {
-        //cout << i << "," << j << endl;
-        vert = glm::vec3(
-                (*data->points)[j++],
-                (*data->points)[j++],
-                (*data->points)[j++]
-                );
-
-        vertex[i] = vert;
-
-        norm = glm::vec3(0.0,0.0,0.0);
-        normals[i] = norm;
-        ++i;
-    }
-
-    cout << "Points data addded to vector" << endl;
-
-    i = 0;
-    while (j < (int)data->polygons->size())
-    {
-        poly = glm::vec3(
-                (*data->polygons)[j++],
-                (*data->polygons)[j++],
-                (*data->polygons)[j++]
-                );
-
-        polygons[i] = poly;
-
-        i++;
-    }
-    cout << "Polygon data added to vector" << endl; 
-    i = 0;
-
-    cout << data->textures->size() << endl;
-    cout << data->texture_count << endl;
-    for(j = 0; j < (int)data->texture_count; j+=2)
-    {
-        t = glm::vec2(
-                (*data->textures)[j*2],
-                (*data->textures)[j*2 + 1]
-                );
-        tex[j] = t;
-    }
-
-    cout << "Texture data added to vector" << endl;
-
-    global.vertex = vertex;
-    global.normals = normals;
-    global.polygons = polygons;
-    global.tex = tex;
-}
-
 glm::vec3 findNormal(glm::mat3 polyPoints)
 {
     return (glm::normalize(glm::cross(polyPoints[2] - polyPoints[0], 
@@ -217,7 +147,7 @@ void buildNormals(void)
     {
         for (int i = 0; i < 3; i++)
         {
-            points[i] = (global.vertex)[poly[i]];
+            points[i] = (global.points)[poly[i]];
         }
 
         norm = findNormal(points);
@@ -228,7 +158,7 @@ void buildNormals(void)
         }
     }
 
-    for (int i = 0; i < (int)global.vertex.size();i++)
+    for (int i = 0; i < (int)global.points.size();i++)
     {
         (global.normals)[i] = glm::normalize((global.normals)[i]);
     }
@@ -287,8 +217,14 @@ int main(int argc, char** argv)
 
     setupGlobal();
 
-    vtk_file* vtk = parser::parser(argv[1],true).get_vtk_file();
-    global.ppm = parser::parser(argv[2],false).get_ppm_file();
+    parse_vtk_file(argv[1], 
+                   vector<glm::vec3> global.points,
+                   vector<glm::vec3> global.normals, 
+                   vector<glm::vec3> global.polygons, 
+                   vector<glm::vec2> global.textures);
+    
+    global.ppm = parse_ppm_file(argv[2]);
+    
     glutInit(&argc,argv);
 
     glutInitDisplayMode(GLUT_SINGLE|GLUT_DEPTH|GLUT_RGB);
@@ -300,7 +236,6 @@ int main(int argc, char** argv)
     glutCreateWindow(argv[0]);
 
     cout << "Building vectors" << endl;
-    buildVectors(vtk);
     buildNormals();
 
     init();
