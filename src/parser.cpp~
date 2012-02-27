@@ -106,7 +106,7 @@
         
         beg++;
         
-        polygons = vector<glm::vec3>(polygon_count);
+        polygons = vector<glm::vec3>(polygon_count, glm::vec3(0.0,0.0,0.0);
         
         glm::vec3 poly;
 
@@ -140,6 +140,7 @@
         cout << "Allocated" << endl;
         int k = 0;
         glm::vec2 t;
+        
         //While the token is not at the end, add texture data to vector
         cout << "Parsing texture data" << endl;
         while (beg != tok.end())

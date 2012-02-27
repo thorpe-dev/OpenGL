@@ -106,7 +106,7 @@
         
         beg++;
         
-        polygons = vector<glm::vec3>(polygon_count);
+        polygons = vector<glm::vec3>(polygon_count, glm::vec3(0.0,0.0,0.0));
         
         glm::vec3 poly;
 
