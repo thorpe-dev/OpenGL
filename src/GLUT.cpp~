@@ -27,8 +27,8 @@ void setupGlobal(void)
 
 void display()
 {
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindTexture(GL_TEXTURE_2D,&global.ppm->texture);
 
     glm::vec3 poly;
 
@@ -42,6 +42,7 @@ void display()
         {
             glNormal3fv(glm::value_ptr((global.normals)[poly[j]]));
             glVertex3fv(glm::value_ptr((global.points)[poly[j]]));
+            glTexCoord2fv(glm::value_ptr((global.textures)[poly[j]]));
         }
         glEnd();
     }
@@ -59,6 +60,8 @@ void reload()
             global.centre[0],global.centre[1],global.centre[2],
             0, 1, 0
             );
+    cout << " Now at " << global.cam[0] << ", " << global.cam[1] << ", " << global.cam[2] << endl;
+    cout << " Now centred at " << global.centre[0] << ", " << global.centre[1] << ", " << global.centre[2] << endl;
 }
 
 inline float to_radians(float degrees)
@@ -72,7 +75,7 @@ void reshape (int x, int y)
 
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(100, (float) x / (float) y, 0.1, 1.2);
+    gluPerspective(to_radians(90), (float) x / (float) y, 0.1, 100);
 
     reload();
 }
@@ -84,43 +87,45 @@ void keyboard(unsigned char key, int, int)
         case 27: // ESC
         exit(0);
         break;
-        case 'q':
+        case 'q': case 'Q':
             global.cam[0] -= 0.1;
             break;
-        case 'w':
+        case 'w': case 'W':
             global.cam[0] += 0.1;
             break;
-        case 'a':
+        case 'a': case 'A':
             global.cam[1] -= 0.1;
             break;
-        case 's':
+        case 's': case 'S':
             global.cam[1] += 0.1;
             break;
-        case 'z':
+        case 'z': case 'Z':
             global.cam[2] -= 0.1;
             break;
-        case 'x':
+        case 'x': case 'X':
             global.cam[2] += 0.1;
             break;
-        case 'e':
+        case 'e': case 'E':
             global.centre[0] -= 0.01;
             break;
-        case 'r':
+        case 'r': case 'R':
             global.centre[0] += 0.01;
             break;
-        case 'd':
+        case 'd': case 'D':
             global.centre[1] -= 0.01;
             break;
-        case 'f':
+        case 'f': case 'F':
             global.centre[1] += 0.01;
             break;
-        case 'c':
+        case 'c': case 'C':
             global.centre[2] -= 0.01;
             break;
-        case 'v':
+        case 'v': case 'V':
             global.centre[2] += 0.01;
             break;
     }
+    
+    reload();
 
 }
 
@@ -136,11 +141,8 @@ void buildNormals(void)
 {
     cout << "Building normals" << endl;
     glm::mat3 points;
-    cout << "1" << endl;
     glm::vec3 norm;
-    cout << "2" << endl;
     
-    cout << global.polygons[0][0] << endl;
     cout << "Allocating done" << endl;
 
     BOOST_FOREACH(glm::vec3 poly, global.polygons)
@@ -181,8 +183,8 @@ void init()
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
     
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,global.ppm->height,global.ppm->width,
-                 0,GL_RGB,GL_UNSIGNED_BYTE,global.ppm->texture);
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,global.ppm->width,global.ppm->height,
+                 0,GL_RGB,GL_UNSIGNED_BYTE,&global.ppm->texture);
 
     glShadeModel(GL_FLAT);
     
@@ -218,10 +220,10 @@ int main(int argc, char** argv)
     setupGlobal();
 
     parse_vtk_file(argv[1], 
-                   vector<glm::vec3> global.points,
-                   vector<glm::vec3> global.normals, 
-                   vector<glm::vec3> global.polygons, 
-                   vector<glm::vec2> global.textures);
+                   global.points,
+                   global.normals, 
+                   global.polygons, 
+                   global.textures);
     
     global.ppm = parse_ppm_file(argv[2]);
     
@@ -231,11 +233,10 @@ int main(int argc, char** argv)
 
     glutInitWindowSize(global.width,global.height);
     
-    glutInitWindowPosition(256,256);
+    glutInitWindowPosition(0,0);
 
     glutCreateWindow(argv[0]);
 
-    cout << "Building vectors" << endl;
     buildNormals();
 
     init();

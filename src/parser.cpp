@@ -76,14 +76,14 @@
         int point_count = lexical_cast<int>(*beg++);
         
         points = vector<glm::vec3>(point_count);
-        normals = vector<glm::vec3>(point_count);
+        normals = vector<glm::vec3>(point_count, glm::vec3(0.0,0.0,0.0));
         
         glm::vec3 point;
         glm::vec3 norm;
 
         beg++;
         
-        int i;
+        int i = 0;
 
         // While the token is not polygons, add points to vector
         cout << "Parsing point data" << endl;
@@ -145,7 +145,6 @@
         cout << "Parsing texture data" << endl;
         while (beg != tok.end())
         {
-            cout << k << endl;
             t = glm::vec2(
                 lexical_cast<float>(*beg++),
                 lexical_cast<float>(*beg++)

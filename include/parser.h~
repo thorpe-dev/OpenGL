@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <glm/glm.hpp>
+#include <clm/clm.hpp>
 
 using namespace std;
 
@@ -16,7 +16,7 @@ struct ppm_file
     char* texture;
 };
 
-void parse_vtk_file(char* s);
+void parse_vtk_file(char* d, vector<glm::vec3> &points, vector<glm::vec3> &normals, vector<glm::vec3> &polygons, vector<glm::vec2> &textures);
 ppm_file* parse_ppm_file(char* s);
 string read_file(char* fname);
 
