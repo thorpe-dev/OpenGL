@@ -177,12 +177,11 @@ void buildVectors(vtk_file* data)
 
     cout << data->textures->size() << endl;
     cout << data->texture_count << endl;
-    for(j = 0; j < (int)data->textures->size(); j+=2)
+    for(j = 0; j < (int)data->texture_count; j+=2)
     {
-//         cout << j << endl;
         t = glm::vec2(
-                (*data->textures)[j*2],
-                (*data->textures)[j*2 + 1]
+                (*data->textures)[j],
+                (*data->textures)[j + 1]
                 );
         tex[j] = t;
     }
